@@ -1,0 +1,122 @@
+a {
+  text-decoration: none;
+}
+
+.Friend_chat {
+  position: relative;
+  width: inherit;
+  min-height:90vh;
+}
+.friend_nav {
+   background-color: var(--color_white);
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   height: 50px;
+}
+.friend_nav p {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.friend_nav p input {
+  outline: none;
+  border:none;
+  border-bottom: 1px solid #ccc;
+  border-bottom-style: groove;
+}
+.friend_nav p img {
+ width: 30px;
+ height: 30px;
+ border-radius: 50%;
+ border: 2px solid var(--esut_color);
+}
+.all_chats {
+  height:80vh;
+  display: grid;
+  align-items: flex-start;
+  grid-row-gap:5px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 0.5rem;
+  scroll-behavior: smooth;
+}
+article.msg_container {
+  display: grid;
+  grid-row-gap:5px;
+  padding: 0.3rem;
+  cursor: pointer;
+  font-size: 14px;
+}
+article.msg_container .date {
+  font-size: 12px;
+  font-style:italic;
+}
+.msg_container img {
+  display: block;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  border:2px solid var(--esut_color);
+  transition:500ms;
+
+}
+.msg_container img:hover{
+  transform: rotateY(180deg);
+  transition:500ms;
+}
+
+.msg_container .msg_grid {
+  position: relative;
+  display:grid;
+  text-align: justify;
+  padding:6px;
+  width:fit-content;
+  max-width:200px;
+  background-color: #ccc;
+  border-radius:4px;
+}
+.msg_container .msg_grid > p {
+  border: 1px solid var(--color_white);
+  background-color: burlywood;
+  width: 100px;
+  height: 100px;
+}
+.msg_container .msg_grid::after{
+  position: absolute;
+  content: '';
+  bottom:3px;
+  right: -6px;
+  background-color:inherit;
+  width: 14px;
+  height: 14px;
+  transform:rotateZ(45deg);
+}
+.msg_container_right {
+  justify-self: end;
+}
+
+.msg_container_right .msg_grid {
+   color: var(--color_white);
+   background-color: var(--esut_color);
+}
+.msg_input_control {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  background-color: var(--color_white);
+  height: 50px;
+}
+.msg_input_control span input[type='search']{
+  outline: none;
+  border-radius: 10px;
+  height: 30px;
+  width: 270px;
+  text-indent: 4px;
+  border: 2px solid #ccc;
+}
+
+

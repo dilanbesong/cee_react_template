@@ -1,0 +1,108 @@
+
+.groupPageSection {
+   background-color: var(--color_white);
+}
+.groupProfile_pic {
+   position: relative;              
+   width: 100%;
+   height: 230px; 
+   background-color: #ddd;
+}
+.groupProfile_pic nav {
+   background-color: var(--color_white);
+   height: 45px;
+   box-shadow: 0 0 8px rgba(0, 0, 0, 0.67);
+}
+.groupProfile_pic nav .fa-arrow-left {
+   margin: 1rem 0 0 1rem;
+}
+.groupProfile_pic p {
+    width: 105px;
+    height: 105px; 
+    position: absolute; 
+    top: 60%; 
+    left:5%;
+    border-radius: 50%;
+    bottom: -10%;          
+}
+.groupProfile_pic p img.groupPic {
+    display: block;
+    width:100%; 
+    height:100%;
+    border-radius:50%;
+    border: 2px solid var(--esut_color);             
+}
+.group_header {
+   margin-top:3rem;
+   text-align: center; 
+   font-size: 13px;              
+}
+.group_header h3 {
+   font-family: monospace; 
+   padding: 1rem;              
+}
+.group_header p {
+   margin-top: -0.7rem;
+   margin: 0 auto;
+   width: 80%;
+   word-wrap: break-word;
+   text-align: center;
+   line-height: 1.7rem;               
+}
+.btn_section {
+   display: flex;
+   justify-content: center;
+   padding:1rem;
+   gap: 3px;               
+}
+.btn_section  button {
+  outline:none;
+  border: none;
+  height: 35px;
+  border-radius: 3px;
+  cursor: pointer;
+  width:190px;
+  background-color: #ccc;
+}
+.btn_section button:nth-child(1) {
+   width:220px;
+   background-color: var(--esut_color);
+   color: var(--color_white);              
+}
+.group_info {
+  margin-left: 1rem;                
+}
+.group_info p {
+   margin-top: 1rem;
+}
+.group_pagination {
+   display: flex; 
+   width: 100%;
+   justify-content: space-evenly;
+   border-top-width:2px;
+   border-top-style: groove;
+   margin-top: 6px;
+   padding-top:6px;
+   cursor: pointer;
+}
+.pagination_underline {
+  border-bottom-color:var(--esut_color);
+  border-bottom-width: 2px;
+  border-bottom-style: groove;
+  padding-bottom: 6px;                
+}
+.groupContainer {
+  position: relative;
+  width:100%;
+  border: 2px solid black;
+  overflow: hidden;                
+}
+.group_slide {
+  position: absolute; 
+  display: flex;
+  width:300%;               
+}
+.group_slide > div {
+  width:100%;
+  height: 100px;
+}

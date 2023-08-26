@@ -1,0 +1,41 @@
+#Schoolmap, .SchoolphotosList {
+   width:100%; 
+   padding: 6px;
+
+}
+#Schoolmap img, video {
+  width: inherit;   
+}
+.SchoolphotosList {
+   display:flex;
+   flex-wrap: wrap;
+   gap:2px;  
+   height:45vh;
+   overflow-y: hidden;             
+}
+.right_side span, .Img_map span {
+   color: #696363;
+   margin-top: 8px;
+   padding-bottom:4px;
+}
+
+.moreLinks{
+ width: 100%;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ padding-bottom: 1rem;
+}
+.moreLinks article.linkCard {
+  width: 93%;
+  height: 50px;
+  box-shadow: 0 0 6px #ccc;
+  border-radius: 4px;
+  margin-top: 6px;
+  cursor: pointer;
+}
+.moreLinks article.linkCard div {
+   margin-top: 8px;
+   margin-left: 8px;
+}

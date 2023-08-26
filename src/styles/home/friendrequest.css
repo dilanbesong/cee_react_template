@@ -1,0 +1,78 @@
+
+.FriendRequestContainer {
+  
+}
+.FriendRequestContainer nav {
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  width:100%;
+  height:50px; 
+  background-color: var(--color_white); 
+  box-shadow: 0 0 8px 6px #ccc;              
+}
+.FriendRequestContainer nav input {
+ align-self: center;
+ width: 200px;
+ height: 28px;
+ border-radius: 3px;
+ outline: none;
+ border: 1px solid #ccc;
+ text-indent: 4px;
+}
+
+.FriendCard {
+   position: relative;
+   display: flex;
+   width: 100%;
+   justify-content:flex-start; 
+   gap:8px;  
+   margin-top:8px; 
+   background-color: var(--color_white);
+   align-items: center;
+   padding-top: 8px; 
+   padding-bottom: 8px; 
+   box-shadow: 0 0 8px 6px #ccc; 
+   cursor: pointer;         
+}
+
+.FriendCard #date {
+   position: absolute;
+   right: 2%;
+   top:5%;
+}
+
+.FriendCard img.friendImg {
+   width:75px; 
+   height: 75px;
+   border-radius: 50%; 
+   border:2px solid var(--esut_color);           
+}
+.FriendCard .acceptDeclineDiv {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;               
+}
+.FriendCard .acceptDeclineDiv p {
+     padding: 0.5rem;            
+}
+.acceptDeclineButtons {
+   display: flex;
+   justify-content: space-evenly;
+   width:230px;
+}
+.FriendCard .acceptDeclineDiv button {
+    outline: none; 
+    border:none;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;             
+}
+
+.FriendCard .acceptDeclineDiv .acceptFriend {
+   background-color: var(--esut_color);
+   color: var(--color_white);
+   margin-left: 8px;               
+}

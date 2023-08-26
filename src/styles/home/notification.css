@@ -1,0 +1,66 @@
+.notify_card {
+    background-color: var(--color_white);
+    padding-bottom:8px;
+    border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px;
+    margin-bottom:8px;
+    cursor: pointer;
+    height: 200px;
+    line-height: 1.5rem;
+    box-shadow: 0 0 8px 5px #ccc;
+    margin-top: 8px;
+}
+.not_open {
+    /* background-color:rgb(192, 230, 192); */
+    background-color: #ccc;
+}
+
+.notify_nav {
+    width: 100%; 
+    background-color: var(--color_white);
+    display: flex;
+    gap: 8px;   
+    align-items: center; 
+    padding-left: 0.5rem; 
+    font-style: oblique;        
+}
+.notify_nav p input[type='search'] {
+     width: 200px; 
+     outline: none; 
+     border-radius: 10px; 
+     height: 28px;
+     text-indent: 4px; 
+     border: 1px solid #ccc;         
+}
+.notify_header {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px; 
+    /* background-color:rgb(188, 212, 123);  */
+    background-color: var(--esut_color);
+    opacity: 0.57;
+    color: var(--color_white); 
+    font-style: oblique;         
+}
+.notify_header div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.notify_header div img {
+    width: 30px;
+    height: 30px; 
+    border-radius: 50%;             
+} 
+
+.notify_card .content p {
+  text-align:justify;
+  padding: 0.35rem;
+  font-style: italic;
+}
+.notify_card .timeAgo {
+    display:block;
+    text-align: end;
+    width: 98%;
+    font-style: oblique;
+}

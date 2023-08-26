@@ -1,0 +1,54 @@
+
+.Img_map {
+   background-color: var(--color_white);
+}
+#esut_map {
+   width: 100%;
+   height: 40vh;
+   border: 1px solid #ccc;
+}
+.imageContent {
+   position: relative;
+   width: 99%; 
+   height: 40vh; 
+   /* border: 1px solid black;  */
+   overflow: hidden;
+}
+.imgSlider {
+  position: absolute;
+  display: flex;
+  min-width: 100%;
+  max-width: auto;
+  height: inherit;
+  top: 0; 
+  bottom: 0;              
+}
+.imgSlider  article.fileContainer {
+  min-width:100%;
+  height: inherit;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+.imgSlider  article.fileContainer img, video {
+   display: block;
+   object-fit:cover;
+}
+.btn_left, .btn_right {
+   position: absolute;
+   outline-color: transparent;
+   border: none;
+   top:45%; 
+   cursor: pointer; 
+   width: 65px; 
+   padding: 0.3rem;
+   background-color:rgba(0, 0, 0, 0.3);
+   color: var(--color_white); 
+   border-radius:3px; 
+   z-index: 1;          
+}
+.btn_right {
+    right:3%;              
+}
+.btn_left {
+    left:3%;              
+}

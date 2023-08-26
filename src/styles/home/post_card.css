@@ -1,0 +1,207 @@
+
+.See_post nav {
+  width: 100%;
+  background-color: var(--color_white);
+  height: 45px;
+  box-shadow: 0 0 8px  rgba(0, 0, 0, 0.67);
+}
+
+.See_post nav .fa-arrow-left {
+  margin: 1rem 0 0 1rem;
+  cursor: pointer;
+}
+
+.all_post {
+  width:inherit;
+  margin-top: 2rem;
+  margin-left: 0rem;
+  height:65vh;
+  background-color: #fff;
+}
+
+.postCard {
+  width:inherit;
+  background-color: var(--color_white);
+  padding: 0.25rem;
+  text-align: center;
+}
+
+.suggestions {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap:8px;
+  min-height: 200px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  background-color: #dddd;
+  border: 1px dotted grey;
+  padding:8px;
+  width:inherit;
+}
+ .sugg_card {
+   text-align: center;
+   width:100%;
+   background-color: var(--color_white);
+   padding: 8px 0 8px 0;
+   border-radius: 3px;
+   margin-bottom: 8px;
+   font-size: 1.1rem;
+  
+}
+.sugg_card div {
+  padding: 1rem;
+}
+ .sugg_card .sugg_img {
+   /* display: flex;
+   justify-content: space-evenly; */
+}
+.sugg_card .sugg_img p {
+  padding: 0.2rem;
+}
+ .sugg_card .sugg_img img {
+  /* align-self: center; */
+  width: 70px;
+  height: 50px;
+  border-radius:8px;
+  border: 2px solid var(--esut_color);
+}
+ .sugg_card .sugg_btns {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 8px;
+}
+ .sugg_card .sugg_btns > button {
+  outline: none;
+  border: none;
+  padding: 0.35rem;
+  width: 80px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+ .sugg_card .sugg_btns > button:first-child{
+  color:#fff;
+  background-color: var(--esut_color);
+}
+.postCard .mainCard {
+  width: inherit;
+  margin-top:1.5rem;
+}
+.postCard .mainCard .cardheader {
+  display: flex;
+  justify-content: space-between;
+}
+.postCard .mainCard .cardheader .user_info {
+   display: flex;
+   align-items: center;
+   gap:6px;
+}
+.postCard .mainCard .cardheader img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--esut_color);
+}
+ .username_and_date{
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+    font-weight: bold;
+
+}
+.username_and_date span:nth-child(2){
+  font-size:14px;
+  color: #bdaeae;
+}
+.postCard .mainCard #postText {
+  /* width:95%; */
+  text-align: justify;
+  word-break: break-all;
+  padding: 10px;
+}
+.number_of_comments {
+  text-align: end;
+  padding: 0.35rem;
+  font-size: 14px;
+}
+.postCard .mainCard .fileGrid {
+  display: grid;
+  grid-template-columns:repeat(2, 1fr);
+  justify-items: center;
+  align-items: center;
+  height:300px;
+}
+.showOneFile {
+  height:400px;
+  overflow-y:scroll;
+}
+
+.filegrid_1 {
+     grid-template-columns:1fr;
+}
+.filegrid_1 div {
+  grid-column: 1/3;
+}
+.filegrid_3 > div:nth-child(1) {
+   grid-row:1/3 ;
+   /* grid-column:1/3; */
+}
+.filegrid_5 > div:nth-child(2) {
+  grid-column: 1/2;
+   grid-row: 1/3;
+}
+.filegrid_5 > div:nth-child(4){
+   grid-column: 1/2;
+   grid-row: 3/4;
+}
+.filegrid_5 > div:nth-child(2)::before{
+  content: attr(data-morefile);
+  position: absolute;
+  font-size: 1.5rem;
+  color: #fff;
+  left: 50%;
+  bottom: 50%;
+  transform: translateX(-50%, 50%);
+  
+}
+
+.postCard .mainCard .fileGrid > div {
+  border: 2px solid #fff;
+  background-color: rgb(230, 202, 167);
+  align-self: center;
+  width:100%;
+  height:100%;
+  position: relative;
+  text-align: center;
+}
+.postCard .mainCard .fileGrid > div video {
+  display: inline-block;
+  width: inherit;
+  height: inherit;
+
+}
+
+.post_reactions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  grid-auto-rows:70px;
+  cursor: pointer;
+  border-top-width:1px;
+  border-top-style: groove;
+  border-color:#ccc;
+}
+.post_reactions span {
+  font-size: 14px;
+  background-color: #dfd7d7;
+  border-radius: 10px;
+  padding: 0.4rem;
+}
+.modify_post > li  {
+  list-style: none;
+  font-size: 14px;
+  color: var(--esut_color);
+  font-style: italic;
+  cursor: pointer;
+}

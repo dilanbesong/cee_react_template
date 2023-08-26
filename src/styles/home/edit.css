@@ -1,0 +1,61 @@
+.update_list {
+  display: flex; 
+  flex-direction: column; 
+  align-items:center; 
+  justify-content: space-evenly; 
+  padding-left: 8px;
+  width: 100%; 
+  outline: none;
+  height: 80vh;           
+}
+.Update_profile nav {
+  background-color: var(--color_white);
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+}
+.Update_profile nav .fa-arrow-left {
+  margin-left: 1rem;
+}
+.update_list p {
+  width:90%; 
+  padding: 0;               
+}
+.update_list p.profile_info {
+  display: flex;
+  justify-content: center;
+}
+.update_list p.profile_info img {
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   border: 2px solid var(--esut_color);
+}
+
+.update_list p span {
+  font-size: 14px;
+}
+.update_list p .fa {
+  padding-left: 4px;
+}
+.update_list p input{
+  display: inline;
+  width:inherit; 
+  outline-color: transparent; 
+  border-radius: 3px; 
+  height: 25px;
+  border: none; 
+  text-align:center;        
+}
+.update_list p button {
+  border: none; 
+  outline-color: transparent;
+  border-radius: 4px;
+  width: inherit;  
+  height: 28px; 
+  background-color: var(--esut_color); 
+  color: var(--color_white); 
+  cursor: pointer;       
+}

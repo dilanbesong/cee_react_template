@@ -1,0 +1,225 @@
+body {
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+             
+}
+.adminContent {
+   display:flex;
+   position: fixed;
+   width: 100%;
+   font-size: 14px;
+   top: 0;             
+}
+.adminSideBar {
+  background-color: #460e0e;
+  color: #fff;
+  height: 100vh;
+  width:10%;
+  text-align: center;                
+}
+.adminVisualizer {
+   color: #fff;  
+   height: 100vh; 
+   width: 90%; 
+   overflow-y: scroll; 
+   overflow-x: hidden;                          
+}
+.adminVisualizer .adminBox {
+  display: flex;
+  justify-content:space-evenly;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 3rem;
+}
+.adminVisualizer .adminBox article {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 255px;
+  height: 200px; 
+  background-color: #fff; 
+  box-shadow: 0 0 8px #ccc; 
+  color: rgba(0, 0, 0, 0.65);
+  border-radius: 4px;             
+}
+.genderImage {
+  font-size: 5rem;
+}
+.adminVisualizer .adminNav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%; 
+  height: 50px; 
+  background-color:#fff; 
+  color: #fff;
+  position:fixed;
+  z-index: 1; 
+  box-shadow: 0 0 8px #ccc;            
+}
+.visualDisplay {
+  display: flex;
+  width: 90%;
+   border: 1px solid #ccc;
+}
+.StudentData {
+  display: flex;
+  padding: 8px;
+  gap:8px;
+  
+}
+.activeStudents {
+  width: 40%;
+  height: 50vh;
+  align-self: last baseline;
+  border-radius: 4px;
+  box-shadow: 0 0 8px #ccc; 
+}
+.graphData {
+  height:50vh;
+  width: 60%;
+  margin:0 auto;  
+  margin-top: 1rem;
+  box-shadow: 0 0 8px #ccc; 
+  border-radius: 4px;             
+}
+.graphData canvas {
+   width: inherit; 
+   height: inherit;
+   border-radius: inherit;            
+}
+.studentTables {
+   display: flex; 
+   justify-content: center;
+   align-items: center;
+   gap: 6px;
+   flex-wrap: wrap; 
+   margin-top: 1rem;          
+}
+.studentTables div {
+   width: 49%;
+   min-height: 350px;
+   background-color: #fff;
+   border-radius: 6px; 
+   box-shadow: 0 0 0.47rem #ccc
+}
+.adminSideBarListContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height:90vh;
+}
+.TableNav {
+  width: 100%;
+  height: 40px;
+  background-color:#ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.TableNav input[type='search'] {
+  outline: none;
+  border: none;
+  width: 200px;
+  border-radius: 3px;
+  text-indent: 4px;
+}
+
+.TableNav p {
+  background-color: #fff;
+  padding: 3px;
+  color: grey;
+  border-radius: 3px;
+}
+.onlineGraph {
+  width: 99%;
+  height: 300px;
+  border-radius: 4px;
+  box-shadow: 0 0 0.47rem #ccc;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+.onlineGraph canvas {
+  width: inherit;
+  height: inherit;
+}
+.userList, .activeList, .payList {
+  overflow-y: scroll;
+  height: inherit;
+}
+ .user {
+  display: flex;
+  color: #000;
+  margin-top: 0.56rem;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 8px;
+  background-color: #ddd;
+  cursor: pointer;
+  box-shadow: 0 0 6px 4px rgba(0, 0, 0, 0.45);
+  
+}
+ .user img {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--esut_color);
+  border-radius: 3px;
+}
+ .user button {
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+@media screen and (max-width:730px) {
+      .adminContent {
+          flex-direction: column-reverse;
+      } 
+      .adminVisualizer .adminNav {
+        background-color: #460e0e;
+        columns: #fff;
+      }
+      .adminVisualizer {
+         width: 100%;         
+      }
+      .StudentData {
+        flex-direction: column;
+      }
+      .activeStudents, .graphData {
+        width: 100%;
+      }
+      .adminSideBar {
+        position: fixed;
+        height: 40px; 
+        width: 100%; 
+        border-top-left-radius: 10px; 
+        border-top-right-radius:10px;
+        z-index: 1;      
+      } 
+      .adminVisualizer .adminBox article {
+        width: 98%;          
+      } 
+      .studentTables {
+        flex-direction: column;
+      }  
+      .studentTables div {
+         width: 98%;         
+      }
+      .adminSideBarListContainer {
+        flex-direction:row;
+        align-items: center;
+        height:auto;
+        width: 100%;
+        margin-top:6px;
+      } 
+      .adminSideBarListContainer li{
+        display: flex;
+        flex-direction: column;
+      } 
+      .adminSideBarListContainer li span {
+         font-size: 12px;
+      }   
+}

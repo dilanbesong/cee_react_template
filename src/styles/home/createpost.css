@@ -1,0 +1,112 @@
+
+.Create_post nav {
+   height: 45px;
+   background-color: var(--color_white);
+   box-shadow: 0 0 8px rgba(0, 0, 0, 0.65);
+   display: flex;
+   justify-content: space-between;
+   padding-left:1rem;
+   padding-right: 1rem;
+   align-items: center;
+}
+.Create_post nav .postButton {
+   padding: 0.5rem;
+   border-radius: 3px;
+   outline: none;
+   color: var(--color_white);
+   background-color: var(--esut_color);
+   cursor: pointer;
+}
+iframe {
+   width:100%;              
+}
+.createPost {
+  background-color: var(--color_white);
+  border-radius: 8px;
+  width: 95%;
+  margin: 0 auto;
+  padding:8px;
+  margin-top: 1rem;
+}
+.createPost h3 {
+   text-align: center; 
+   padding: 0.5rem;
+   border-bottom-width: 1px;
+   border-color: #ccc; 
+   border-bottom-style: groove;             
+}
+.poster_profile {
+  display: flex;  
+  align-items: center; 
+  gap: 8px;
+  padding-bottom:1rem; 
+  padding-top: 1rem;            
+}
+.poster_profile img {
+   width: 40px; 
+   height:40px;              
+   border-radius: 50%;
+   border: 1.5px solid var(--esut_color);               
+}
+.poster_profile div {
+   display: flex;
+   flex-direction: column; 
+   gap: 3px;              
+}
+.poster_profile div span {
+    font-weight: 600;
+    font-size: 14px;              
+}
+.poster_profile div input[list='data-list']{
+    width: 70px; 
+    background-color: #ddd; 
+    border-radius: 8px;
+    outline:none;
+    border: none; 
+    text-align: center;           
+}
+
+.createPost textarea {
+   width:100%;
+   height:150px;
+   outline-color: transparent;  
+   border: 1px solid #ccc; 
+   border-radius: 5px;
+   font-size: 16px;
+   text-indent: 6px;
+   resize: none;            
+}
+.createPost textarea:focus{
+   border: 1px solid #ccc;               
+}
+.choose_file {
+  display: flex;
+  justify-content: space-around;
+}
+.choose_file label {
+  background-color:#ccc;
+  /* color: var(--color_white); */
+  padding: 4px;
+  border-radius: 6px;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
+}
+.choose_file input {
+   width: 60px; 
+   outline:none;
+   border: 1px solid #ccc; 
+   border-radius: 4px; 
+   text-align: center;         
+}
+.createPost button {
+   width: 100%; 
+   margin-top: 6px;
+   outline-color: transparent;
+   cursor: pointer;  
+   border: none;
+   height: 30px;
+   border-radius: 3px;
+   color: #fff;
+   background-color:#696161;            
+}

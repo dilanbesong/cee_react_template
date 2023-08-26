@@ -1,0 +1,58 @@
+
+.Make_payments {
+    min-height:100vh;
+    background-color:#dddd; 
+
+          
+}
+.Make_payments nav {
+    height: 50px;
+    background-color: var(--color_white);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.67);
+}
+.Make_payments nav .fa-arrow-left {
+    margin: 1rem 0 0 1rem;
+}
+
+.Make_payments p {
+    padding: 6px;
+    width: 90%;              
+}
+.Make_payments p input[type='text']{
+   width:inherit;
+   outline: none; 
+   border: 1px solid #ccc; 
+   height: 20px; 
+   border-radius: 6px;            
+}
+ .Make_payments button {
+   display: block;
+   width:100%; 
+   padding: 0.35rem;
+   align-self:center;
+   outline: none;  
+   border: none; 
+   background-color: var(--esut_color);
+   color: var(--color_white); 
+   border-radius:4px; 
+   cursor: pointer;
+   height: 30px; 
+   font-size: 1rem;      
+}
+
+.payment_card {
+    background-color: var(--color_white); 
+    width: 97%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin: 0 auto;
+    border-radius: 4px; 
+    box-shadow: 0 0 8px #ccc; 
+    margin-top: 4rem;        
+}
+.payment_card img, label {
+   display: block;               
+}
