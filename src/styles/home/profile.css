@@ -106,7 +106,26 @@
   border-bottom-style: groove; 
   border-color: var(--esut_color);             
 }
+.postRecieptContainer {
+  overflow-x: hidden;
+ 
+  width: 100%;
+}
+.postRecieptContainer .postReceiptSlider {
+  display: flex;
+  width:200%;
+  transition: 500ms;
+  align-items: center;
+}
+.postRecieptContainer .postReceiptSlider div.all_posts, div.all_reciepts {
+  width: 100%;
+  text-align: center;
+  align-self: self-start;
+}
 .all_posts {
-   overflow:initial; 
-   height: initial;              
+ 
+}
+.all_reciepts {
+  
+
 }

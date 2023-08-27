@@ -1,8 +1,13 @@
+import { useRef } from "react";
 
-
-const ForgottenPassword = () => {
+const ForgottenPassword = ({ authSlideContainer }) => {
+  const forgottenPasswordForm = useRef(null)
+  const loginIndex = 0
+  const navigateToLogin = () => {
+     authSlideContainer.current.style.transform = `translateX(${ forgottenPasswordForm.current.clientWidth * loginIndex}px)`
+  }
      return <>
-           <form className="Forgotten_Password_form form" autoComplete="off">
+           <form className="Forgotten_Password_form form" ref={forgottenPasswordForm} autoComplete="off">
              <div className="form_header">
                    <img src="https://tse2.mm.bing.net/th?id=OIP.Oprpe36XqXLL_HjlF04i2QAAAA&pid=Api&P=0&h=180" alt="esutlogo"/>
                    <p>Esut portal</p>
@@ -21,7 +26,7 @@ const ForgottenPassword = () => {
             </section>
             <div>
                 <button type="submit">verify</button>
-                 <p><a href="#">Go back to Sign in</a></p>
+                 <p onClick={() => navigateToLogin()}>Go back to Sign in</p>
             </div>
           </form>
      </>             

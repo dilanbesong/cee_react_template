@@ -1,7 +1,11 @@
 import '../../styles/auth/auth.css'
 import Login from './login'
 import ForgottenPassword from './forgetpassword'
+import { useEffect, useRef } from 'react'
 const AuthNav = () => {
+  const authSlideContainer = useRef(null)
+  
+
    return <>
       <header>
       <nav className="auth_nav">
@@ -14,9 +18,9 @@ const AuthNav = () => {
 <div className='authBackground'>
     <main className='authMain'> 
       <div className='authSlideContainer'>
-        <div className="auth_slider">
-           <Login/>
-            <ForgottenPassword/>
+        <div className="auth_slider" ref={authSlideContainer}>
+           <Login authSlideContainer={authSlideContainer} />
+            <ForgottenPassword authSlideContainer={authSlideContainer} />
         </div>
       </div>
        <div className="auth_dialog_Box">

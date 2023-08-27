@@ -1,7 +1,28 @@
  import { useNavigate } from 'react-router-dom'
+ import { useRef } from 'react'
  
 const Profile = () => {
   const navigate = useNavigate()
+  const postRecieptSlider = useRef(null)
+  const paginatedSpanPostButton = useRef(null)
+  const paginatedSpanRecieptButton = useRef(null)
+  const allPostRef = useRef(null)
+  const allRecieptRef = useRef(null)
+
+  const handlePaginationPost = () => {
+    paginatedSpanPostButton.current.classList.add('span_underline')
+    paginatedSpanRecieptButton.current.classList.remove('span_underline')
+    const PostIndex = 0
+    postRecieptSlider.current.style.transform = `translateX(${-allPostRef.current.clientWidth * PostIndex}px)`
+  }
+
+  const handlePaginationReciept = () => {
+    paginatedSpanPostButton.current.classList.remove('span_underline')
+    paginatedSpanRecieptButton.current.classList.add('span_underline')
+    const RecieptIndex = 1
+    postRecieptSlider.current.style.transform = `translateX(${-allRecieptRef.current.clientWidth * RecieptIndex}px)`
+  }
+  
    return <>
        <div className="View_profile" id="View_profile">
 
@@ -22,7 +43,7 @@ const Profile = () => {
                  <div className="checkup_btn">
                     <button onClick={() => navigate('/home/createPost')}>add</button>
                     <button onClick={() => navigate('/home/profileupdate')}>edit <i className="fa fa-edit"></i></button>
-                    <button> local <i className="fa fa-map-marker" aria-hidden="true"></i> </button>
+                    <button onClick={() => navigate('/home/location')}> local <i className="fa fa-map-marker" aria-hidden="true"></i> </button>
                  </div>
                  <ul className="info_list">
                    <li><i className="fa fa-code" aria-hidden="true"></i> Reg No 2019030187292</li>
@@ -31,13 +52,14 @@ const Profile = () => {
                    
                  </ul>
                  <div className="profile_pagination">
-                   <span className="span_underline">Post</span>
-                   <span>Receipts</span>
+                   <span className='span_underline' ref={paginatedSpanPostButton} onClick={ () => handlePaginationPost() }>Post</span>
+                   <span ref={paginatedSpanRecieptButton} onClick={ () => handlePaginationReciept() }>Receipts</span>
                  </div>
 
-
-     <div className="all_posts">
-          <article className="postCard" >
+       <div className="postRecieptContainer">
+           <div className="postReceiptSlider" ref={postRecieptSlider}>
+              <div className='all_posts' ref={allPostRef}>
+                   <article className="postCard" >
                 <div className="suggestions">suggestions</div>
                 <div className="mainCard">
                   <header className="cardheader">
@@ -90,7 +112,13 @@ const Profile = () => {
                  </section>
                 </div>
               </article>
-         </div>
+
+              </div>
+              <div className='all_reciepts' ref={allRecieptRef}>Reciept goes here !!!</div>
+           </div>
+       </div>
+
+         {/* <div className="all_posts"></div> */}
 
      </div>  
 
@@ -98,3 +126,5 @@ const Profile = () => {
 }
 
 export default Profile
+
+
