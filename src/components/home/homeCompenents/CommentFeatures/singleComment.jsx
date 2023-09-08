@@ -85,7 +85,7 @@ const SingleComment = ({ comment, setCommentsArr, commentsArr }) => {
           />
         )}
       </article>
-      <div style={{ display: isReply ? "block" : "none", paddingLeft:8 }}>
+      <div style={{ display: isReply ? "block" : "none", paddingLeft:6 }}>
         {comment?.reply?.map((cmd) => {
           return (
             <SingleComment
