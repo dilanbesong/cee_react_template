@@ -120,12 +120,17 @@ select {
    margin-top:-0.6rem;
    width: 60%;
    overflow-y: scroll;
+   display: flex;
+   
 }
 .SignUp_form nav {
    height:40px;
    background-color: var(--color_white);
    width: 100%;
    box-shadow: 0 0 8px rgba(0, 0, 0, 0.57);
+   display: flex;
+   justify-content: space-around;
+   align-items:center;
 }
 .SignUp_form nav .fa-arrow-left {
    margin: 1rem 0 0 1rem;
@@ -176,7 +181,7 @@ select {
    border-bottom-style: ridge;
    border-bottom-width:2px;
    transition: 1s;
-   width: 170px;
+   width: 160px;
 }
 .form .form_control_input div input:focus{
    padding-left:8px;

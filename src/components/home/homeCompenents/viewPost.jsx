@@ -1,8 +1,11 @@
 import Comment from "./comment"
 import Suggestion from "./suggestion"
 import {useNavigate} from 'react-router-dom'
+import { useLocation } from "react-router-dom"
 const ViewPost = () => {
     const navigate = useNavigate()
+    const { state } = useLocation()
+    console.log(state);
    return <>
        <div className="See_post">
          <nav> <i className="fa fa-arrow-left" onClick={() => navigate(-1)}></i> Post</nav>

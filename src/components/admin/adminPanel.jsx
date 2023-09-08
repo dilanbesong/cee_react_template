@@ -1,5 +1,6 @@
 import '../../styles/admin/admin.css'
 import { useNavigate } from 'react-router-dom'
+import {MapLocation} from '../home/homeCompenents/location'
 const AdminPanel = () => {
      const navigate = useNavigate()
      return <>
@@ -61,7 +62,7 @@ const AdminPanel = () => {
                        </div>
                        <div className="StudentData">
                           <div className="graphData">
-                           <canvas></canvas>         
+                            <canvas></canvas>
                            </div>
                            <div className="activeStudents">
                               <div className="activeList">
@@ -120,7 +121,7 @@ const AdminPanel = () => {
                                         
                        </div>
                        <div className="onlineGraph">
-                         <canvas></canvas>
+                          <MapLocation lat={0} lng={15}/>
                        </div>
                   </div>
           </main> 

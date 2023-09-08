@@ -40,6 +40,17 @@
    height: 100px; 
    text-indent: 4px;                       
 }
+label[ for='groupProfilePic'], label[ for='groupBackgroundPic'] {
+   background-color:rgb(73, 73, 160);
+   width: 150px;
+   padding: 0.5rem;
+   text-align: center;
+   border-radius: 3px;
+   color: var(--color_white);
+   margin-left: 1rem;
+   cursor: pointer;
+   font-size: 10px;
+}
 .Privacy {
   display: flex; 
   justify-content: space-evenly; 

@@ -3,11 +3,17 @@ import axios from 'axios';
 
 const AppContext = createContext();
 
+const options = {
+  enableHighAccuracy: true,
+  maximumAge: 30000,
+  timeout: 27000,
+};
+
 export const AppProvider = ({ children }) => {
   const [state, setState] = useState({
     user: null,
     person: null,
-    location:{ latitude:0, longitude:0},
+    location:{ lat:0, lng:0},
     otp: '',
   });
   
@@ -18,11 +24,11 @@ export const AppProvider = ({ children }) => {
 
       function onSuccess(pos) {
         const { latitude, longitude } = pos.coords;
-        setState({user:{...data}, location:{ latitude, longitude }, person:null, otp:''})
+        setState({user:{...data}, location:{ lat:latitude, lng:longitude }, person:null, otp:'', setState})
       }
 
       navigator.geolocation.getCurrentPosition(onSuccess);
-      console.log(state);
+      //console.log(state);
    
     } catch (error) {
       console.log(error.message);
@@ -45,3 +51,4 @@ export const AppProvider = ({ children }) => {
 export const useGlobalContext = () => {
   return useContext(AppContext);
 };
+

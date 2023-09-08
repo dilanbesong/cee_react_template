@@ -22,6 +22,8 @@ import "../../styles/home/friendrequest.css"
 import "../../styles/home/register.css"
 import "../../styles/home/myfriends.css"
 import "../../styles/home/mygroup.css"
+import "../../styles/home/video-react.css";
+
 
 const HomePage = ({ children }) => {
    return <>

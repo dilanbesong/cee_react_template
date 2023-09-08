@@ -1,44 +1,62 @@
 import MoreLinks from "./moreLinks"
-import { useState, useEffect } from "react"
+import PhotoSlide from "./photoSlide"
+import { useState, useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
+import { Marker, useLoadScript, GoogleMap }  from '@react-google-maps/api'
+import { Audio } from 'react-loader-spinner'
+import { useGlobalContext } from "../../../context"
 
+
+const Map = ({ lat, lng, }) => {
+    console.log(lat,lng);
+    const locationCoord = useMemo( () => ({lat, lng}), [] )
+    return <>
+       <GoogleMap zoom={10} center={locationCoord} mapContainerClassName={ `esut_map_google_class`}>
+           <Marker position={locationCoord}/>
+         </GoogleMap>
+    </>
+}
+
+export const MapLocation = ({ lat, lng}) => {
+    
+    
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey:import.meta.env.VITE_GOOGLE_MAP_API_KEY
+  })
+  if(!isLoaded) return <Audio
+  height="80"
+  width="80"
+  radius="9"
+  color="brown"
+  ariaLabel="loading"
+  wrapperStyle
+  wrapperClass
+/>
+  return <Map lat={lat} lng={lng}/> 
+}
 
 
 const EsutLocation = () => {
+    const { location: { lat, lng} } = useGlobalContext()
     const [ local, setLocal ] = useState('ceelocal')
     const navigate = useNavigate()
     const Local = ({ local }) => {
-        if(local == 'ceelocal') return <div id="esut_map"> esut  cee local</div>
-        if(local == 'mylocal') return <div id="esut_map"> my own local</div>
-        if(local == 'images') return <div id="esut_map">esut cee images</div>
+        if(local == 'ceelocal') return <MapLocation lat={0} lng={15}/>
+        if(local == 'mylocal') return <MapLocation lat={lat} lng={lng}/>
+        if(local == 'images') return <PhotoSlide/>
     }
    return <>
     {/* <nav className="navLocal"> <i className="fa fa-arrow-left"></i></nav> */}
        <div className="Img_map">
-        <nav> <i className="fa fa-arrow-left" onClick={() => navigate(-1)}></i></nav>
+        <nav> <i className="fa fa-arrow-left" onClick={() => navigate(-1)} aria-hidden></i> others</nav>
   
-          <select className="localOption" name="" id="" onChange={(e) => setLocal(e.target.value)}>
+          <select className="localOption" onChange={(e) => setLocal(e.target.value)}>
               <option value="ceelocal">CEE local </option>
               <option value="mylocal">My local</option>
               <option value="images">CEE images</option>
           </select>
-          <i className="fa fa-map-marker" aria-hidden="true"></i>
+          <i className="fa fa-map-marker" aria-hidden></i>
            <Local local={local}/>
-
-
-
-           {/* <span><i className="fa fa-photo" aria-hidden="true"></i> CEE Gallery</span>
-           <section className="imageContent">
-             <button className="btn_left"><i className="fa fa-arrow-left" aria-hidden="true"></i></button>
-             <button className="btn_right"><i className="fa fa-arrow-right" aria-hidden="true"></i></button>
-               <div className="imgSlider">
-                   <article className="fileContainer">1</article>
-                   <article className="fileContainer">1</article>
-                   <article className="fileContainer">1</article>
-               </div>
-           </section> */}
-
-
            <MoreLinks/>
         </div> 
    </>               

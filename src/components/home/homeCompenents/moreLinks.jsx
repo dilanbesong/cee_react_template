@@ -5,13 +5,13 @@ const MoreLinks = () => {
     return <>
          <div className="moreLinks">
                   <article className="linkCard" onClick={ () => navigation('/home/friendrequest',{ id: '1'})}>
-                     <div> <i class="fa fa-user-circle" aria-hidden="true"></i> <span>friend request</span></div>
+                     <div> <i className="fa fa-user-circle" aria-hidden="true"></i> <span>friend request</span></div>
                   </article>
                   <article className="linkCard" onClick={ () => navigation('/home/friendrequest')}>
-                     <div> <i class="fa fa-user-plus" aria-hidden="true"></i> <span>sent request</span></div>
+                     <div> <i className="fa fa-user-plus" aria-hidden="true"></i> <span>sent request</span></div>
                   </article>
                   <article className="linkCard" onClick={ () => navigation('/home/mygroup')}>
-                     <div> <i class="fa fa-users" aria-hidden="true"></i> <span>my groups</span></div>
+                     <div> <i className="fa fa-users" aria-hidden="true"></i> <span>my groups</span></div>
                   </article>
                   <article className="linkCard" onClick={ () => navigation('/home/admin')}>
                     <div> <i className="fa fa-user-o" aria-hidden></i> <span>admin</span></div>

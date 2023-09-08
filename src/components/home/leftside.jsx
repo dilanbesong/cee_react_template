@@ -9,13 +9,12 @@ const LeftSide = () => {
 
          <p>
   
-          { sideBarLinks.map( ({ icon, link, iconName, id }) => {
-            return <>
-                 <Link to={link}>
-                   <i className={icon} key={id} aria-hidden="true"></i>
+          { sideBarLinks.map( ({ icon, link, iconName, id },i) => {
+            return  <Link to={link} key={i}>
+                   <i className={icon} key={id} aria-hidden></i>
                    <span>{ iconName }</span>
                </Link>
-            </>
+            
           })}
 
          

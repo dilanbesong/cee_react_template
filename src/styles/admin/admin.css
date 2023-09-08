@@ -25,6 +25,7 @@ body {
    overflow-y: scroll; 
    overflow-x: hidden;                          
 }
+
 .adminVisualizer .adminBox {
   display: flex;
   justify-content:space-evenly;
@@ -78,13 +79,17 @@ body {
   box-shadow: 0 0 8px #ccc; 
 }
 .graphData {
+  position: relative;
   height:50vh;
   width: 60%;
   margin:0 auto;  
   margin-top: 1rem;
   box-shadow: 0 0 8px #ccc; 
-  border-radius: 4px;             
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-end;             
 }
+
 .graphData canvas {
    width: inherit; 
    height: inherit;

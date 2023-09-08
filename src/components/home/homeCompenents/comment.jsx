@@ -1,63 +1,198 @@
-const Comment = () => {
-    return <>
-       <section className="post_comments">
-                     <div className="main_comment_form">
-                        <textarea name="" id="" cols="30" rows="10" placeholder="type..."></textarea>
-                        <button>comment</button>
-                     </div>
-                     <div className="all_comments">
-                         <article className="comment_card">
-                           <div className="comment_header">
-                              <img src="esutlogo.jpg" alt="esutlogo"/>
-                              <span>@Dilan</span>
-                           </div>
-                           <div className="comment_body">
-                              <p>Hello this is my comment</p>
-                             <div className="reactions">
-                               <span>Reply</span>
-                               <span>Edit</span>
-                               <span>Delete</span>
-                               <span>Like 100k</span>
-                             </div>
-                             <div className="reactions">
-                               <span>save</span>
-                               <span>cancel</span>
-                             </div>
-                           </div>
-                           <div className="main_comment_form">
-                                <textarea name="" id="" cols="30" rows="10" placeholder="reply..."></textarea>
-                                <button>comment</button>
-                           </div>
-                         </article>
+import { useState } from "react";
+import { ReplyForm } from "./CommentFeatures/ReplyForm";
+import SingleComment from "./CommentFeatures/singleComment";
 
-
-                       <article className="comment_card">
-                           <div className="comment_header">
-                              <img src="esutlogo.jpg" alt="esutlogo"/>
-                              <span>@Dilan</span>
-                           </div>
-                           <div className="comment_body">
-                              <p>Hello this is my comment</p>
-                             <div className="reactions">
-                               <span>Reply</span>
-                               <span>Edit</span>
-                               <span>Delete</span>
-                               <span><i class="fa fa-heart" aria-hidden="true"></i> Like 100k</span>
-                             </div>
-                             <div className="reactions">
-                               <span>save</span>
-                               <span>cancel</span>
-                             </div>
-                           </div>
-                           <div className="main_comment_form">
-                                <textarea name="" id="" cols="30" rows="10" placeholder="reply..."></textarea>
-                                <button>comment</button>
-                           </div>
-                         </article>
-
-                     </div>
-                 </section>
-    </>              
+export function MyComment(text) {
+  this._id = new Date().getTime().toString();
+  this.name = text;
+  this.reply = new Array();
 }
 
-export default Comment
+const Comment = () => {
+  const [commentsArr, setCommentsArr] = useState([]);
+  const [commentInput, setCommentInput] = useState("");
+  const addComment = (e) => {
+     setCommentsArr( commentsArr => {
+      return [...commentsArr, new MyComment(commentInput)]
+     })
+     setCommentInput('')
+  };
+
+  const editComment = (e) => {};
+  const deleteComment = (e) => {};
+  return (
+    <>
+      <section className="post_comments">
+        <ReplyForm
+          parentCommentId={"1"}
+          commentInput={commentInput}
+          setCommentInput={setCommentInput}
+          addComment={addComment}
+        />
+        <div className="all_comments">
+          {commentsArr.map((comment, i) => {
+            return (
+              <SingleComment
+                key={i}
+                comment={comment}
+                setCommentsArr={setCommentsArr}
+                commentsArr={commentsArr}
+              />
+            );
+          })}
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Comment;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const commentsData = [
+//   {
+//     _id: 23345,
+//     name: "hello",
+//     reply: [
+//       {
+//         _id: 56768,
+//         name: "hello child",
+//         reply: [
+//           {
+//             _id: 678493,
+//             name: "hello child child",
+//             reply: [],
+//           },
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     _id: 54575,
+//     name: "second text",
+//     reply: [
+//       {
+//         _id: 54656,
+//         name: "second text child",
+//         reply: [],
+//       },
+//     ],
+//   },
+//   {
+//     _id: 92983,
+//     name: "third child",
+//     reply: [],
+//   },
+// ];

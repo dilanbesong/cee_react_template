@@ -1,9 +1,12 @@
-import Suggestion from './suggestion'
+// import Suggestion from './suggestion'
 import Filegrid from './filegrid'
-const Post = () => {
+import { useNavigate } from 'react-router-dom'
+const Post = ({ body, fileList, posterId }) => {
+   const navigate = useNavigate()
+   const post = { body, fileList, posterId }
    return <>
       <article className="postCard">
-               <Suggestion/>
+               {/* <Suggestion/> */}
                 <div className="mainCard">
                   <header className="cardheader">
                     <div className="user_info">
@@ -14,13 +17,8 @@ const Post = () => {
                     </div>
                     </div>
                   </header>
-                  <p id="postText">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Quis mollitia modi fuga assumenda, omnis rerum dicta nam
-                    aspernatur blanditiis? Laborum eum placeat molestiae magnam
-                    quos praesentium in ex, eos facilis.
-                  </p>
-                  <Filegrid/>
+                  <p id="postText"> { body } </p>
+                  <Filegrid fileList={ fileList }/>
 
                  <div className="number_of_comments">2.2K Comments</div>
                   <section className="post_reactions">
