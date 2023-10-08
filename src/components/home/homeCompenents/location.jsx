@@ -3,7 +3,8 @@ import PhotoSlide from "./photoSlide"
 import { useState, useEffect, useMemo } from "react"
 import { useNavigate } from "react-router-dom"
 import { Marker, useLoadScript, GoogleMap }  from '@react-google-maps/api'
-import { Audio } from 'react-loader-spinner'
+import { Audio, ThreeCircles, ThreeDots } from 'react-loader-spinner'
+import axios from "axios"
 import { useGlobalContext } from "../../../context"
 
 
@@ -23,31 +24,49 @@ export const MapLocation = ({ lat, lng}) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey:import.meta.env.VITE_GOOGLE_MAP_API_KEY
   })
-  if(!isLoaded) return <Audio
-  height="80"
-  width="80"
-  radius="9"
-  color="brown"
-  ariaLabel="loading"
-  wrapperStyle
-  wrapperClass
-/>
+  if(!isLoaded) return <ThreeDots color="brown"/>
   return <Map lat={lat} lng={lng}/> 
 }
 
-
+ 
 const EsutLocation = () => {
     const { location: { lat, lng} } = useGlobalContext()
     const [ local, setLocal ] = useState('ceelocal')
+    const [loading, setLoading ] = useState(true)
+    const [ esutFilesGalery, setEsutFileGalery ] = useState([])
     const navigate = useNavigate()
+
+   async function getCEEGallery(){
+   
+    const { data } = await axios.get('/api/post/getAllpost')
+  
+    if(data.posts){
+      let fileList = data.posts.map( post => {
+        if(post.poster == 'CEE'){
+          return post.fileList
+        }
+      }).filter( file => file !== undefined ).flat(1)
+      setEsutFileGalery(fileList)
+      setLoading(false)
+      return
+    }
+   
+  }
+
+   useEffect( () => {
+      getCEEGallery()
+   },[])
+
+      console.log(esutFilesGalery)
+
+
     const Local = ({ local }) => {
         if(local == 'ceelocal') return <MapLocation lat={0} lng={15}/>
         if(local == 'mylocal') return <MapLocation lat={lat} lng={lng}/>
-        if(local == 'images') return <PhotoSlide/>
+        if(local == 'images') return <PhotoSlide fileList={esutFilesGalery}/>
     }
    return <>
-    {/* <nav className="navLocal"> <i className="fa fa-arrow-left"></i></nav> */}
-       <div className="Img_map">
+        { loading ? <div className="centerLoad"> <ThreeCircles color="brown"/></div>  : <div className="Img_map">
         <nav> <i className="fa fa-arrow-left" onClick={() => navigate(-1)} aria-hidden></i> others</nav>
   
           <select className="localOption" onChange={(e) => setLocal(e.target.value)}>
@@ -58,7 +77,8 @@ const EsutLocation = () => {
           <i className="fa fa-map-marker" aria-hidden></i>
            <Local local={local}/>
            <MoreLinks/>
-        </div> 
+        </div>  }
+       
    </>               
 }
 

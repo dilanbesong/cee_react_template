@@ -38,13 +38,14 @@
   border: 1px dotted grey;
   padding:8px;
   width:inherit;
+  
 }
  .sugg_card {
    text-align: center;
    width:100%;
    background-color: var(--color_white);
    padding: 8px 0 8px 0;
-   border-radius: 3px;
+   border-radius:5px;
    margin-bottom: 8px;
    font-size: 1.1rem;
   
@@ -119,6 +120,9 @@
   word-break: break-all;
   padding: 10px;
 }
+.postCard .mainCard #postText a {
+  color: brown;
+}
 .number_of_comments {
   text-align: end;
   padding: 0.35rem;
@@ -179,6 +183,7 @@
   display: inline-block;
   width: inherit;
   height: inherit;
+  aspect-ratio: 1/0.6;
 
 }
 .custom-audio {

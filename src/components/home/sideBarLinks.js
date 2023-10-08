@@ -1,4 +1,5 @@
 
+
 export const sideBarLinks = [
   {
     id: 1,
@@ -7,11 +8,11 @@ export const sideBarLinks = [
     iconName: "Home",
   },
 
-  { id: 1, 
-    icon: "fa fa-user", 
-    link: "/home/profile", 
-    iconName: "Profile" 
-  },
+  // { id: 1, 
+  //   icon: "fa fa-user", 
+  //   link: `/home/profile/${userId}`, 
+  //   iconName: "Profile" 
+  // },
 
   {
     id: 1,

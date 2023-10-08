@@ -75,6 +75,9 @@ article.msg_container .date {
   max-width:200px;
   background-color: #ccc;
   border-radius:4px;
+  font-size: 11px;
+  font-style: italic;
+  line-height:1.1rem;
 }
 .msg_container .msg_grid > p {
   border: 1px solid var(--color_white);
@@ -117,6 +120,22 @@ article.msg_container .date {
   width: 270px;
   text-indent: 4px;
   border: 2px solid #ccc;
+}
+.showRecorderCard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 2rem;
+  height: 80px;
+}
+.showRecorderCard span {
+  font-weight:600;
+}
+.showRecorderCard button {
+   padding: 0.5rem;
+   outline: none;
+   border: none;
+   border-radius: 3px;
 }
 
 

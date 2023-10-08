@@ -41,7 +41,7 @@
    text-indent: 4px;                       
 }
 label[ for='groupProfilePic'], label[ for='groupBackgroundPic'] {
-   background-color:rgb(73, 73, 160);
+   background-color:#3f1621;
    width: 150px;
    padding: 0.5rem;
    text-align: center;

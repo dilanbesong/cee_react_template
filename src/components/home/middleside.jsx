@@ -1,11 +1,12 @@
-
+import { useRef,  axios } from "react"
 
 
 const MiddleSide = ( { children }) => {
+  const middleSideEle = useRef()
 
 
    return <>
-      <section className="middle_side" id="middle">
+      <section  className="middle_side" id="middle">
 
           {children}
           

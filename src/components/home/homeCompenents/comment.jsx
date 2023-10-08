@@ -1,25 +1,48 @@
 import { useState } from "react";
 import { ReplyForm } from "./CommentFeatures/ReplyForm";
 import SingleComment from "./CommentFeatures/singleComment";
+import { ThreeDots } from "react-loader-spinner";
+import { useEffect } from "react";
+import axios from "axios";
+
+let userObj = JSON.parse(sessionStorage.getItem('user'))
 
 export function MyComment(text) {
   this._id = new Date().getTime().toString();
-  this.name = text;
+  this.body = text;
+  this.commentorId = userObj ? userObj.user._id : '1'
   this.reply = new Array();
 }
 
-const Comment = () => {
-  const [commentsArr, setCommentsArr] = useState([]);
-  const [commentInput, setCommentInput] = useState("");
+const Comment = ({ postId, postComments }) => {
+  const [commentsArr, setCommentsArr] = useState(postComments);
+  const [commentInput, setCommentInput] = useState(null);
+  const [isLoadComment, setIsLoadComment] = useState(false);
+  
   const addComment = (e) => {
-     setCommentsArr( commentsArr => {
-      return [...commentsArr, new MyComment(commentInput)]
-     })
-     setCommentInput('')
+    commentsArr.push(new MyComment(commentInput));
+    setCommentInput("");
+    createComment()
   };
 
-  const editComment = (e) => {};
-  const deleteComment = (e) => {};
+  async function createComment() {
+    const { data } = await axios.post("/api/comment/createComment", {
+      postId,
+      commentsObj: commentsArr,
+    });
+  
+    if (data[0]) {
+      setCommentsArr(data);
+      setIsLoadComment(false);
+      return;
+    }
+    alert(data.msg);
+  }
+
+  // useEffect(() => {
+  //   if (commentInput === "") createComment();
+  // });
+
   return (
     <>
       <section className="post_comments">
@@ -30,16 +53,21 @@ const Comment = () => {
           addComment={addComment}
         />
         <div className="all_comments">
-          {commentsArr.map((comment, i) => {
-            return (
-              <SingleComment
-                key={i}
-                comment={comment}
-                setCommentsArr={setCommentsArr}
-                commentsArr={commentsArr}
-              />
-            );
-          })}
+          {isLoadComment ? (
+            <ThreeDots color="grey" />
+          ) : (
+            commentsArr.map((comment, i) => {
+              return (
+                <SingleComment
+                  key={i}
+                  comment={comment}
+                  setCommentsArr={setCommentsArr}
+                  commentsArr={commentsArr}
+                  postId={postId}
+                />
+              );
+            })
+          )}
         </div>
       </section>
     </>
@@ -47,119 +75,6 @@ const Comment = () => {
 };
 
 export default Comment;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // const commentsData = [
 //   {

@@ -1,38 +1,79 @@
 // import WaveSurfer from "wavesurfer.js";
-import { AudioPlayer } from 'react-audio-player-component';
+import { AudioPlayer } from "react-audio-player-component";
 
-import { useRef,  useState } from "react";
+import { useRef, useState } from "react";
+import { formateText } from '../textFormate'
 
-function showFileByType (file, waveFormContainer, i) {
-  
-  
+export const SoundPlayer = ({ src }) => {
+   return <AudioPlayer
+          src={src}
+          minimal={false}
+          width={170}
+          trackHeight={75}
+          barWidth={3}
+          gap={3}
+          visualise={true}
+          backgroundColor="#FFF8DE"
+          barColor="#C1D0B5"
+          barPlayedColor="#99A98F"
+          skipDuration={2}
+          showLoopOption={true}
+          showVolumeControl={true}
+
+          // seekBarColor="purple"
+          // volumeControlColor="blue"
+          // hideSeekBar={true}
+          // hideTrackKnobWhenPlaying={true}
+        />
+}
+
+export const VoiceNote = ( { src, backgroundColor }) => {
+  return <AudioPlayer
+          src={src}
+          minimal={false}
+          width={300}
+          trackHeight={5}
+          barWidth={10}
+          gap={3}
+          visualise={true}
+          backgroundColor={backgroundColor}
+          barColor={'white'}
+          barPlayedColor="#ffffff"
+          skipDuration={2}
+          showLoopOption={true}
+          showVolumeControl={true}
+
+          seekBarColor="white"
+          volumeControlColor="white"
+          // hideSeekBar={true}
+          // hideTrackKnobWhenPlaying={true}
+        />
+}
+
+export const Message = (msg) => {
+  if( msg.includes('data:audio')){
+    return <SoundPlayer src={msg}/>
+  }
+  return formateText(msg)
+}
+
+
+
+function showFileByType(file, waveFormContainer, i) {
   if (file.includes("data:audio")) {
-      
     return (
-      <div ref={waveFormContainer} key={i} >
-         <AudioPlayer 
-         
-      src={file}
-      minimal={false}
-      width={250}
-      trackHeight={75}
-      barWidth={1}
-      gap={1}
-
-      visualise={true}
-      backgroundColor="#FFF8DE"
-      barColor="#C1D0B5"
-      barPlayedColor="#99A98F"
-
-      skipDuration={2}
-      showLoopOption={true}
-      showVolumeControl={true}
-
-      // seekBarColor="purple"
-      // volumeControlColor="blue"
-      // hideSeekBar={true}
-      // hideTrackKnobWhenPlaying={true}
-    />
+      <div
+        ref={waveFormContainer}
+        key={i}
+        style={{
+          background: "rgba(255, 248, 222)",
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "center",
+          alignItems:'center'
+        }}
+      >
+        <SoundPlayer src={file}/>
       </div>
     );
   }
@@ -53,11 +94,10 @@ function showFileByType (file, waveFormContainer, i) {
     );
   }
   return;
-};
+}
 
 const Filegrid = ({ fileList }) => {
-  
-  const waveFormContainer = useRef(null)
+  const waveFormContainer = useRef(null);
   // useEffect(() => {
   //   if(waveFormContainer.current) {
   //     const wavesurfer = WaveSurfer.create({
@@ -68,9 +108,9 @@ const Filegrid = ({ fileList }) => {
   //     });
   //     setSuffer(wavesurfer)
   //   }
-    
+
   // },[]);
-  
+
   if (fileList.length == 0) return;
 
   if (fileList.length == 1) {
@@ -99,7 +139,9 @@ const Filegrid = ({ fileList }) => {
 
   return (
     <div className="fileGrid filegrid_nth" data-morefile={+fileList.length - 4}>
-      {fileList.slice(0, 4).map((file,i) => showFileByType(file, waveFormContainer, i))}
+      {fileList
+        .slice(0, 4)
+        .map((file, i) => showFileByType(file, waveFormContainer, i))}
     </div>
   );
 };

@@ -1,6 +1,5 @@
 
 import { Routes, Route } from 'react-router-dom'
-import io from 'socket.io-client'
 import AuthNav from './components/auth/authnav'
 import HomePage from './components/home/homePage'
 import AdminPanel from './components/admin/adminPanel'
@@ -21,12 +20,9 @@ import CreateGroup from './components/home/homeCompenents/createGroup'
 import FriendRequest from './components/home/homeCompenents/FriendRequest'
 import FriendList from './components/home/homeCompenents/FriendList'
 import MyGroups from './components/home/homeCompenents/mygroups'
-
-
-
-
-//const socket = io.connect('http://localhost:5000')
-
+import GroupMembers from './components/home/homeCompenents/groupMembers'
+import SentFriendRequest from './components/home/homeCompenents/sentFriendRequest'
+import { ProtectedRoute } from './ProtectedRoute'
 
 
 export default function App() {
@@ -34,11 +30,12 @@ export default function App() {
   return <>
    <Routes>
      <Route path='/' element={ <AuthNav/>}/>
-  <Route path='/home'>
+  <Route path='/home' element={<ProtectedRoute/>}>
      <Route path='main' element= {<HomePage children={<Home/>}/>}> </Route>
      <Route path='payment' element={<HomePage children={ <Payment/> }/>}> </Route>
      <Route path='notification' element={<HomePage children={ <Notification/> }/>}> </Route>
      <Route path='createPost' element={<HomePage children={ <CreatePost/> }/>}> </Route>
+     <Route path='editPost/:id' element={<HomePage children={ <CreatePost/> }/>}> </Route>
      <Route path='location' element={<HomePage children={ <Location/> }/>}> </Route>
      <Route path='profileupdate' element={<HomePage children={ <ProfileUpdate/> }/>}> </Route>
      <Route path='profile' element={<HomePage children={ <Profile/> }/>}> </Route>
@@ -50,6 +47,8 @@ export default function App() {
      <Route path='group/:id' element={<HomePage children={<GroupPage/>}/>}></Route>
      <Route path='creategroup' element={<HomePage children={<CreateGroup/>}/>}></Route>
      <Route path='mygroup' element={<HomePage children={<MyGroups/>}/>}></Route>
+     <Route path='groupmembers' element={<HomePage children={<GroupMembers/>}/>}></Route>
+     <Route path='sentfriendRequest' element={ <HomePage children={<SentFriendRequest/>}/>}></Route>
      <Route path='friendrequest' element={ <HomePage children={<FriendRequest/>}/>}></Route>
      <Route path='friendlist' element={ <HomePage children={<FriendList/>}/>}></Route>
      <Route path='admin' element={<AdminPanel/>}></Route>

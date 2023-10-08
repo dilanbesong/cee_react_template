@@ -1,36 +1,178 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useState, useEffect, useRef,} from "react";
+import io from "socket.io-client";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Post from "./post";
+import { Circles, ThreeCircles, ThreeDots } from "react-loader-spinner";
+
+const socket = io.connect("http://localhost:5000");
 
 const Home = () => {
-   return <>
-       <div className="All_posts" id="All_posts">
-            <header className="status_section">
-              <strong>Status</strong>
-              <div className="all_status">
-                <div className="status_card" data-level="+"></div>
-                <div className="status_card" data-level="100lv"></div>
-                <div className="status_card" data-level="200lv"></div>
-                <div className="status_card" data-level="300lv"></div>
-                <div className="status_card" data-level="400lv"></div>
-                <div className="status_card" data-level="500lv"></div>
-              </div>
-              <div className="add_post">
-                <div><img src="esutlogo.jpg" alt="esutlogo" /></div>
-                <div>
-                  <input
-                    type="search"
-                    placeholder="Catergorically search or use keyword"
-                  />
+  const navigate = useNavigate();
+  const allPostEle = useRef()
+
+  const [onLineFriends, setOnLineFriends] = useState([]);
+  const [skipCount, setSkipCount ] = useState(0)
+  const [postLimit, setPostLimit ] = useState(2) 
+
+  const [student, setStudent] = useState(
+    JSON.parse(sessionStorage.getItem("user"))
+  );
+  const { user } = student;
+ 
+  socket.on("status", (activeUsers) => {
+    const activeFriends = activeUsers.filter( onlineUser => {
+       return user.FriendList.includes(onlineUser._id)
+    })
+    setOnLineFriends(activeFriends);
+  });
+
+  const [posts, setPosts] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [postloading, setPostLoading] = useState(true);
+  const [bottomLoader, setBottomLoader] = useState(false)
+  const [postcategory, setPostCategory] = useState("all");
+
+
+  const findPost = async (e) => {
+    setSearchInput(e.target.value);
+    const { data } = await axios.get(`/api/post/searchPost/${searchInput}`);
+    if (data[0]) {
+      setPostLoading(false);
+      setPosts(data);
+    }
+  };
+  const caterogicallySearchPost = async () => {
+    const { data } = await axios.get(`/api/post/searchPost/${postcategory}`);
+    setPostLoading(true);
+    if (data[0]) {
+      setPostLoading(false);
+      setPosts(data);
+    }
+  };
+
+  async function getPost() {
+    //const { data } = await axios.get("/api/post/getAllPost");
+  // let [skipCount, postLimit ] = [ 0, 2]
+   
+   const { data } = await axios.get(`/api/post/sequenciallyFetchPost/${skipCount}/${postLimit}`)
+    if (data.posts) {
+      setPosts(data.posts);
+      setPostLoading(false);
+      return;
+    }
+  }
+  useEffect(() => {
+    caterogicallySearchPost();
+  }, [postcategory]);
+
+  useEffect(() => {
+    getPost();
+     socket.emit("active", { userId: user._id });
+  }, []);
+
+
+
+async function loadMoreCards(){
+    setSkipCount(skipCount => skipCount + 1)
+    setPostLimit(postLimit => postLimit + 5)
+    const { data } = await axios.get(`/api/post/sequenciallyFetchPost/${skipCount}/${postLimit}`)
+    if(data.posts){
+       setPosts( posts => {
+          return [...posts, ...data.posts]
+       })
+      return
+    }
+    alert(data.err)  
+  }
+  const [isLastCard, setIsLastCard ] = useState(false)
+  useEffect( () => {
+    const lastCardObserver = new IntersectionObserver( entries => {
+        const lastCard = entries[0]
+       setIsLastCard(lastCard.isIntersecting)
+        if(lastCard.isIntersecting){
+           loadMoreCards()
+           lastCardObserver.unobserve(lastCard.target)
+           return
+        }
+         
+    })
+    const lastCard = allPostEle.current.lastChild
+    lastCardObserver.observe(lastCard)
+    
+  }, [isLastCard])
+
+
+
+
+  return (
+    <>
+      <div className="All_posts" id="All_posts">
+        <header className="status_section">
+          <strong>Create</strong>
+          <div className="all_status">
+            <div
+              className="status_card"
+              data-level="+"
+              onClick={() => navigate("/home/createPost")}
+            ></div>
+            {onLineFriends.map((user) => {
+              return (
+                <div
+                  className="onLineCard"
+                  key={user._id}
+                  onClick={() => navigate("/home/profile/", { state: user._id })}
+                >
+                  <img src={user.profileImage} alt="" />
+                  <p>{user.username}</p>
                 </div>
-                <div>
-                  <select name="" id="">
-                    <option value="CEE">CEE</option>
-                    <option value="ALL">All</option>
-                  </select>
-                </div>
-              </div>
-            </header>
-            <section className="all_post">
-              <article className="postCard">
+              );
+            })}
+
+            {/* <div className="status_card" data-level="200lv"></div> */}
+               
+          </div>
+          <div className="add_post">
+            <div>
+              <img src={user.profileImage} alt="esutlogo" />
+            </div>
+            <div>
+              <input
+                type="search"
+                placeholder="Catergorically search or use keyword"
+                value={searchInput}
+                onInput={(e) => findPost(e)}
+              />
+            </div>
+            <div>
+              <select
+                name=""
+                id=""
+                onChange={(e) => setPostCategory(e.target.value)}
+              >
+                <option value="all">all</option>
+                <option value="cee">cee</option>
+              </select>
+            </div>
+          </div>
+        </header>
+        <section className="all_post" ref={allPostEle}>
+          {postloading ? (
+            <div className="centerLoad">
+              <ThreeCircles color="grey" />
+            </div>
+          ) : (
+            posts.reverse().map((post, postIndex) => {
+              return (
+                  <Post {...post} postIndex={postIndex} postSize={posts.length}  />
+
+                
+              );
+            })
+          )}
+
+          {/* <article className="postCard">
                 <div className="suggestions">
                     <article className="sugg_card">
                         <div className="sugg_img">
@@ -234,10 +376,11 @@ const Home = () => {
                    <span> <i className="fa fa-eye" aria-hidden></i> 100k views </span>
                  </section>
                 </div>
-              </article>
-            </section>
-          </div>  
-   </>               
-}
+              </article> */}
+        </section>
+      </div>
+    </>
+  );
+};
 
-export default Home
+export default Home;

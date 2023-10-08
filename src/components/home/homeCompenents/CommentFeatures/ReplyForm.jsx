@@ -3,7 +3,12 @@ export const ReplyForm = ({
   commentInput,
   setCommentInput,
   addComment,
+  isReply
 }) => {
+  // if(commentInput == ''){
+  //   alert('Inpu field cannot be empty!!!')
+  //   return
+  // }
   return (
     <>
       <div className="main_comment_form">
@@ -16,13 +21,14 @@ export const ReplyForm = ({
           rows="10"
           placeholder="type..."
         ></textarea>
-        <button
+        {isReply? <strong id={parentCommentId} onClick={(e) => addComment(e)}>reply</strong>:
+         <><button
           type="button"
           id={parentCommentId}
           onClick={(e) => addComment(e)}
         >
           comment
-        </button>
+        </button></>}
       </div>
     </>
   );

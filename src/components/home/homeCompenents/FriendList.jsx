@@ -1,6 +1,32 @@
 import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { ThreeCircles } from 'react-loader-spinner'
 const FriendList = () => {
    const navigate = useNavigate()
+   const [friendList, setFriendList ] = useState([])
+   const [loading, setLoading] = useState(true)
+    const user = JSON.parse(sessionStorage.getItem('user')).user
+   async function getMyFriends(){
+      const { data } = await axios.get(`/api/friends/${user._id}`)
+      if(data.Friends){
+         setLoading(false)
+         setFriendList(data.Friends)
+      }
+   }
+   useEffect( () =>{
+     getMyFriends()
+   }, [])
+
+   const removeFriend = async (friendId) => {
+      const { data } = await axios.delete(`/api/deleteOneFriend/${friendId}`)
+      if(data.Friends){
+         setFriendList( friendList => {
+            return friendList.filter( friend =>  friend._id !== friendId)
+         })
+      }
+   }
+   
     return <>
       <div className="FriendListSection">
           <nav> 
@@ -10,17 +36,21 @@ const FriendList = () => {
             </div>
            </nav>
            <div className="FriendList">
-                  <article id="friendCard">
-                     <img src="profile" className="friendImg" alt="" /> 
+                  { loading ? <div className="centerLoad">
+              <ThreeCircles color="brown" />
+            </div> : friendList.map( friend => {
+                return <article key={friend._id} id="friendCard">
+                     <img src={friend.profileImage} onClick={() => navigate('/home/profile', { state: friend._id })} className="friendImg" alt="" /> 
                       <div className="friendCardInfo"> 
-                         <strong>Dilan</strong>
-                         <p>2 mutual friends</p>
+                         <strong>{friend.username}</strong>
+                         <p>0 mutual friends</p>
                       </div>
                       <div className="friendCardButton">
-                           <button> cancel</button>  
-                           <button className="add">add</button>       
+                           <button onClick={ () => removeFriend(friend._id)}> cancel</button>        
                       </div>
                   </article>
+            })
+                  }
            </div>
       </div>
     </>              

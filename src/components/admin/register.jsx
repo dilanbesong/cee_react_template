@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 const Register = () => {
   const [user, setUser] = useState({
     username: "",
     email: "",
-    password: "",
     regNumber: "",
-    sex: "",
-    isAdmin:false,
-    phoneNumber: "",
+    YearOfEntry: `${new Date().getFullYear()}`,
     level: 100,
-    yearOfEntry: new Date().getFullYear(),
+    sex: "",
+    password: "",
+    isAdmin:false,
+    PhoneNumber: "",  
     modeOFEntry: "UTME",
   });
   const [edit, setEdit ] = useState(false)
@@ -20,9 +21,24 @@ const Register = () => {
     const { name, value } = e.target;
     setUser({...user,[name]: value });
   };
-  const handleSignUp = (e) => {
-    e.preventDefault()
-     console.log(user)
+  const handleSignUp = async (e) => {
+     e.preventDefault()
+     try {
+         const { data } = await axios.post('/api/register', user)
+         if(data['errorMessage']){
+            alert(data.errorMessage)
+            return
+         }
+         if(data['msg']){
+            alert(data.msg)
+           return
+         }
+            alert('Account successfully created')
+            return
+         
+     } catch (error) {
+       alert(error.message)
+     }
   };
   return (
     <>
@@ -33,10 +49,6 @@ const Register = () => {
             <span onClick={() => navigate("/home/creategroup")}>
               {" "}
               Create group ? New{" "}
-            </span>
-            <span>
-              {" "}
-              IsAdmin <input type="checkbox" name='isAdmin' value={Boolean(!user.isAdmin)} onChange={handleInput} />
             </span>
           </nav>
           <h3>Create Account</h3>
@@ -86,8 +98,8 @@ const Register = () => {
               <i className="fa fa-phone" aria-hidden="true"></i>
               <input
                 type="text"
-                name="phoneNumber"
-                value={user.phoneNumber}
+                name="PhoneNumber"
+                value={user.PhoneNumber}
                 onChange={handleInput}
                 maxLength="11"
                 placeholder="enter phoneNumber ..."
@@ -134,7 +146,7 @@ const Register = () => {
 
             <div>
               <p>Year of Entry</p>
-              <select required name='yearOFEntry' value={user.yearOfEntry} onChange={handleInput}>
+              <select required name='YearOFEntry' value={user.YearOfEntry} onChange={handleInput}>
                 <option value={new Date().getFullYear()}>
                   {new Date().getFullYear()}
                 </option>

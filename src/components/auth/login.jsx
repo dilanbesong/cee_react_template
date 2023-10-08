@@ -1,21 +1,58 @@
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { TailSpin, InfinitySpin, BallTriangle, ThreeDots } from "react-loader-spinner"
+import axios from 'axios'
+import { useGlobalContext } from "../../context"
+import {  useNavigate } from "react-router-dom"
+
 
 const Login = ({ authSlideContainer }) => {
    const loginForm = useRef(null)
+   const navigate = useNavigate()
    const [login, setLogin ] = useState({ email:'', password:''})
+   const [isSubmit, setIsSubmit ] = useState(false)
+   const [isLogin, setIsLogin ] = useState(false)
+   const { setState } = useGlobalContext()
+  
+
    const handleLoginInput = (e) => {
       const { name, value } = e.target
       setLogin({...login, [name]:value})
    }
-   const handleLogin = (e) => {
+   const handleLogin = async (e) => {
      e.preventDefault()
-     console.log(login);
+     setIsSubmit(true)
+    const { data } = await axios.post('/api/login', login)
+
+    console.log(data);
+    
+    if(data['user'] && data['user'].isBlocked == false){
+       setIsLogin(true)
+       setIsSubmit(false)
+      //  setState(global => {
+      //    return {...global, user: data.user}
+      //  })
+       sessionStorage.setItem('isAuth', 'true')
+       sessionStorage.setItem('user', JSON.stringify(data))
+       navigate('/home/main')
+      return
+    }else{
+       setIsSubmit(false)
+       navigate('/')
+       alert(data.msg)
+    }
+       
+    
+     
    }
    const forgottenPasswordIndex = 1
    const navigateToForgottPassword = () => {
      authSlideContainer.current.style.transform = `translateX(${-loginForm.current.clientWidth * forgottenPasswordIndex}px)`
   }
+
+  
+
+  
 
    return <>
          <form className="SignIn_form form" onSubmit={handleLogin} ref={loginForm}  autoComplete="off">
@@ -38,7 +75,7 @@ const Login = ({ authSlideContainer }) => {
   
             </section>
             <div className="PasswordAccountDiv">
-              <button type="submit">Sign up</button>
+              {isSubmit ? <ThreeDots color="brown"/> : <button type="submit">submit</button>}
               <p onClick={() => navigateToForgottPassword() }>Forgot password ? Click Here</p>
             </div>
           </form>

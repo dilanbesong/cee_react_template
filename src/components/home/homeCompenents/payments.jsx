@@ -1,18 +1,13 @@
 import {useNavigate} from 'react-router-dom'
-  import { usePaystackPayment } from 'react-paystack';
+import { usePaystackPayment } from 'react-paystack';
+import { useState } from 'react';
+import axios from 'axios';
+import { ThreeCircles } from 'react-loader-spinner';
 
 
-const config = {
-      reference: (new Date()).getTime().toString(),
-      email: "user@example.com",
-      amount: 20000, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
-      publicKey:import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
-  };
 
-  const onSuccess = (reference) => {
-    // Implementation for whatever you want to do with reference and after success call.
-    console.log(reference);
-  };
+
+  
 
   // you can call this function anything
   const onClose = () => {
@@ -20,7 +15,34 @@ const config = {
     console.log('closed')
   }
 
-  const PaystackHookExample = () => {
+ 
+
+const Payments = () => {
+  const navigate = useNavigate()
+  const [student, setStudent] = useState(JSON.parse(sessionStorage.getItem('user')))
+  const { user } = student
+
+  const config = {
+      reference: (new Date()).getTime().toString(),
+      email:user.email,
+      amount: 20000, //Amount is in the country's lowest currency. E.g Kobo, so 20000 kobo = N200
+      publicKey:import.meta.env.VITE_PAYSTACK_PUBLIC_KEY,
+  };
+
+  
+
+  const onSuccess =  (reference) => {
+    //Implementation for whatever you want to do with reference and after success call.
+     const payer = { regNumber:user.regNumber || '', refNumber:reference, amount:5700, level:user.level || '' }
+    
+    axios.post('/api/payment/makePayment', payer).then( ({ data}) => {
+      alert(data.msg)
+    })
+  };
+
+
+  
+   const PaystackHookExample = () => {
       const initializePayment = usePaystackPayment(config);
       return (
             <button type='button' onClick={() => {
@@ -28,13 +50,9 @@ const config = {
             }}>submit</button>
       );
   };
-  
 
-const Payments = () => {
-  const navigate = useNavigate()
-  
   return <>
-      <div className="Make_payments" id="Make_payments">
+       <div className="Make_payments" id="Make_payments">
 
           <nav> <i className="fa fa-arrow-left" onClick={() => navigate(-1)}></i> Payments</nav>
 
@@ -42,19 +60,19 @@ const Payments = () => {
               <h3>Pay Departmental fees</h3>      
                 <p> 
                   <label htmlFor="">Username:</label>
-                  <input type="text" readOnly value="Dilan Besong"/>
+                  <input type="text" readOnly value={user.username}/>
                   <i className="fa fa-user-o" aria-hidden="true"></i>
                 </p>
                 
                 <p> 
                   <label htmlFor="">Reg number</label>
-                  <input type="text" readOnly value="2019030187292"/>
+                  <input type="text" readOnly value={user.regNumber}/>
                    <i className="fa fa-code" aria-hidden="true"></i>
                 </p>
                 
                 <p>
                   <label htmlFor="">Email</label>
-                  <input type="text" readOnly  value="besongdilan@gmail.com"/>
+                  <input type="text" readOnly  value={user.email}/>
                   <i className="fa fa-envelope" aria-hidden="true"></i>
                 </p>
                 
@@ -77,7 +95,7 @@ const Payments = () => {
                  </p>
                <p> <PaystackHookExample/></p>
               </form>
-          </div> 
+          </div>  
 
   </>                
 }
