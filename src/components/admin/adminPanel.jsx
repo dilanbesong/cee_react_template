@@ -6,7 +6,7 @@ import axios from "axios";
 import { BarChart, BoysVsGirlsGraph, OnlineGraph } from "./chart";
 import { ThreeDots } from "react-loader-spinner";
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("http://localhost:5000" || "https://cee-info.onrender.com");
 
 const Levels = ["100", "200", "300", "400", "500"];
 
@@ -23,9 +23,11 @@ const AdminPanel = () => {
   const [isLoadPayment, setIsLoadPayment ] = useState(true)
   const [onlineUsers, setOnlineUsers ] = useState([])
 
- socket.on("online", (activeUsers) => {
-    setOnlineUsers(onlineUsers)
+useEffect( () => {
+   socket.on("online", (activeUsers) => {
+    setOnlineUsers(activeUsers)
   });
+})
 
   async function getYears() {
     const { data } = await axios.get("/api/adminPanel/getYearOptions");
