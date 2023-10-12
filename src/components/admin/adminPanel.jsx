@@ -50,6 +50,7 @@ useEffect( () => {
   async function searchPayment(refNumber){ 
 
     const { data } = await axios.get(`/api/payment/searchPayments/${refNumber}`)
+    console.log(data);
     if(data.length){
       setIsLoadPayment(false)
       setPaymentList(data)
@@ -230,7 +231,7 @@ useEffect( () => {
                 </p>
               </nav>
               <section className="payList">
-               { isLoadPayment ? <center> loading... </center> : paymentList.map ( payment => {
+               { isLoadPayment ? <center> <ThreeDots color="brown"/> </center> : paymentList.map ( payment => {
                   return  <article className="user payCard">
                     <img src="https://tse3.mm.bing.net/th?id=OIP.ruat7whad9-kcI8_1KH_tQHaGI&pid=Api&P=0&h=220" alt="" />
                      <span>{payment.regNumber}</span>

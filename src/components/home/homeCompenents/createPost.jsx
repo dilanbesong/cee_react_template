@@ -3,6 +3,8 @@ import useSpeechToText from "react-hook-speech-to-text";
 import { useEffect, useState } from "react";
 import { Audio } from "react-loader-spinner";
 import axios from "axios";
+import toast, {Toaster} from 'react-hot-toast'
+
 
 import Post from "./post";
 import { useGlobalContext } from "../../../context";
@@ -64,7 +66,7 @@ const CreatePost = () => {
   } = student;
   const [post, setPost] = useState({
     body: "",
-    poster:'',
+    poster:'CEE',
     fileList: [],
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -109,7 +111,7 @@ const CreatePost = () => {
       return sizeInByte + file.size;
     }, 0);
     if (fileSize / 1024 / 1024 > 1024) {
-      alert("Files must not be more than 1gb or 1024mb");
+      toast.error("Files must not be more than 1gb or 1024mb");
       setFileBlob([]);
       return;
     }
@@ -154,20 +156,34 @@ const CreatePost = () => {
  
   const savePost = async () => {
     try {
+         console.log(post);
       if (isEdit) {
         const { data } = await axios.put("/api/post/editPost", post);
-        if (data.isEdit) alert("post successfully edited..");
+        if (data.isEdit) toast.success("post successfully edited..", {
+          duration:4000,
+          style:{
+            width:250,
+            height:120
+          }   
+        });
         return;
       }
 
-      const { data } = await axios.post("/api/post/createPost", post);
+      const { data } = await axios.post("/api/post/createPost", post); // data is pointing to the post
+      const createNotification = await axios.post('/api/createNotification', { notificatorId:data.poster, postId:data._id } )
+        // createNotification.isNotify
       if (data) {
-        alert("Posted");
+         toast.success("post successfully created..", {
+          duration:4000,
+          style:{
+            width:250,
+            height:120
+          }
+        });
         return;
       }
     } catch (error) {
-      console.log(error.message);
-      alert(error.message)
+      toast.error(error.message)
     }
   };
 
@@ -270,6 +286,7 @@ const CreatePost = () => {
         </div>
         {showPost && <Post {...post} postIndex={-1} postSize={0} />}
       </div>
+      <Toaster/>
     </>
   );
 };

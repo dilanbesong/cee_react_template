@@ -43,7 +43,7 @@ function Group( { groupName, groupProfile, groupDescription, groupMembers, _id, 
                   </div> 
               </nav>
               <div className="groupList">
-                 {   isloading ? <CirclesWithBar color='grey'/> :  mygroups.map( group => {
+                 {   isloading ? <div className="centerLoad"> <CirclesWithBar color='brown'/> </div> :  mygroups.map( group => {
                      return <Group {...group }/>
                  })} 
               </div>

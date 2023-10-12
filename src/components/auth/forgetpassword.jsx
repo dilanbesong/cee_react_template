@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const ForgottenPassword = ({ authSlideContainer }) => {
   const forgottenPasswordForm = useRef();
@@ -14,15 +15,14 @@ const ForgottenPassword = ({ authSlideContainer }) => {
 
   async function generateResetCode() {
     const { data } = await axios.post("/api/getResetCode", { email: reset.email });
-    console.log(data);
     if (data.isSendCode) {
       setShowOtpInput(true);
       setShowPasswordInput(true);
       setSubmitText("reset password");
-      alert(data.msg);
+      toast.success(data.msg);
       return;
     }
-    alert(data.error);
+    toast.error(data.error);
     return;
   }
   async function resetPassword() {
@@ -37,16 +37,16 @@ const ForgottenPassword = ({ authSlideContainer }) => {
         setShowOtpInput(false);
         setShowPasswordInput(false);
         setSubmitText("verify");
-        alert(data.msg);
+        toast.success(data.msg);
         return;
       }
-      alert(data.error);
+      toast.error(data.error);
       return;
     }
   }
   const handleReset = (e) => {
     e.preventDefault();
-    console.log(e.target.value);
+
     if (e.target.value == "verify") {
       console.log('gen reset code here');
       generateResetCode();
@@ -54,7 +54,6 @@ const ForgottenPassword = ({ authSlideContainer }) => {
     if (e.target.value == "reset password") {
       resetPassword();
     }
-    console.log(reset);
   };
   const loginIndex = 0;
   const navigateToLogin = () => {
@@ -124,6 +123,7 @@ const ForgottenPassword = ({ authSlideContainer }) => {
           <p onClick={() => navigateToLogin()}>Go back to Sign in</p>
         </div>
       </form>
+      <Toaster/>
     </>
   );
 };

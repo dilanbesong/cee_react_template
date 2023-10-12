@@ -3,16 +3,16 @@
     padding-bottom:8px;
     border-bottom-right-radius:10px;
     border-bottom-left-radius:10px;
-    margin-bottom:8px;
     cursor: pointer;
     height: 200px;
     line-height: 1.5rem;
-    box-shadow: 0 0 8px 5px #ccc;
-    margin-top: 8px;
+    margin:0 auto;
+     margin-top:8px;
+    width: 90%;
 }
 .not_open {
     /* background-color:rgb(192, 230, 192); */
-    background-color: #ccc;
+    /* background-color: #ccc; */
 }
 
 .notify_nav {

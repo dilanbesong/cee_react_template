@@ -6,15 +6,27 @@ import { Marker, useLoadScript, GoogleMap }  from '@react-google-maps/api'
 import { Audio, ThreeCircles, ThreeDots } from 'react-loader-spinner'
 import axios from "axios"
 import { useGlobalContext } from "../../../context"
+import maplibregl from 'maplibre-gl';
+import Map, {NavigationControl} from 'react-map-gl';
 
 
-const Map = ({ lat, lng, }) => {
-    console.log(lat,lng);
+const Maps = ({ lat, lng, }) => {
     const locationCoord = useMemo( () => ({lat, lng}), [] )
+    console.log(lat, lng);
     return <>
-       <GoogleMap zoom={10} center={locationCoord} mapContainerClassName={ `esut_map_google_class`}>
-           <Marker position={locationCoord}/>
-         </GoogleMap>
+        <Map mapLib={maplibregl} 
+        initialViewState={{
+          longitude: lng , // 16.62662018
+          latitude: lat, // 49.2125578
+          zoom: 14
+        }}
+        // style={{width: "100%", height: "100vh"}}
+        mapStyle="https://api.maptiler.com/maps/basic/style.json?key=OTWx8gHIyfySiWNiYIIx"
+        style={{width: "100%", height: " calc(45vh - 77px)"}}
+        // mapStyle="https://api.maptiler.com/maps/streets/style.json?key=YOUR_MAPTILER_API_KEY_HERE"
+      >
+        <NavigationControl position="top-left" />
+      </Map>
     </>
 }
 
@@ -25,12 +37,13 @@ export const MapLocation = ({ lat, lng}) => {
     googleMapsApiKey:import.meta.env.VITE_GOOGLE_MAP_API_KEY
   })
   if(!isLoaded) return <ThreeDots color="brown"/>
-  return <Map lat={lat} lng={lng}/> 
+  return <Maps lat={lat} lng={lng}/> 
 }
 
  
 const EsutLocation = () => {
     const { location: { lat, lng} } = useGlobalContext()
+  
     const [ local, setLocal ] = useState('ceelocal')
     const [loading, setLoading ] = useState(true)
     const [ esutFilesGalery, setEsutFileGalery ] = useState([])
@@ -61,7 +74,7 @@ const EsutLocation = () => {
 
 
     const Local = ({ local }) => {
-        if(local == 'ceelocal') return <MapLocation lat={0} lng={15}/>
+        if(local == 'ceelocal') return <MapLocation lat={49.2125578} lng={16.62662018}/>
         if(local == 'mylocal') return <MapLocation lat={lat} lng={lng}/>
         if(local == 'images') return <PhotoSlide fileList={esutFilesGalery}/>
     }

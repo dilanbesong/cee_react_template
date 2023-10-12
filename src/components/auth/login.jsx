@@ -1,6 +1,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { TailSpin, InfinitySpin, BallTriangle, ThreeDots } from "react-loader-spinner"
+import toast, {  Toaster } from "react-hot-toast"
 import axios from 'axios'
 import { useGlobalContext } from "../../context"
 import {  useNavigate } from "react-router-dom"
@@ -24,14 +25,12 @@ const Login = ({ authSlideContainer }) => {
      setIsSubmit(true)
     const { data } = await axios.post('/api/login', login)
 
-    console.log(data);
+    
     
     if(data['user'] && data['user'].isBlocked == false){
        setIsLogin(true)
        setIsSubmit(false)
-      //  setState(global => {
-      //    return {...global, user: data.user}
-      //  })
+      
        sessionStorage.setItem('isAuth', 'true')
        sessionStorage.setItem('user', JSON.stringify(data))
        navigate('/home/main')
@@ -39,7 +38,7 @@ const Login = ({ authSlideContainer }) => {
     }else{
        setIsSubmit(false)
        navigate('/')
-       alert(data.msg)
+       toast.error(data.msg)
     }
        
     
@@ -79,6 +78,7 @@ const Login = ({ authSlideContainer }) => {
               <p onClick={() => navigateToForgottPassword() }>Forgot password ? Click Here</p>
             </div>
           </form>
+          <Toaster/>
     </>               
 }
 

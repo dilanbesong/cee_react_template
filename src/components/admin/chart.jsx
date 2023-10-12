@@ -51,7 +51,7 @@ export const BoysVsGirlsGraph = ({ studentData }) => {
   }, []);
   return  (
     <div className="studenTable" ref={graphDataEle}>
-      <Pie
+      <Bubble
         data={
 
           {
@@ -60,12 +60,12 @@ export const BoysVsGirlsGraph = ({ studentData }) => {
             {
               label: "boys",
               data: studentData.BoysData,
-              backgroundColor:['rgba(75,192,192, 1)']
+               backgroundColor:['rgba(75,192,192, 1)']
             },
             {
               label: "girls",
               data: studentData.GirlsData,
-              backgroundColor:['#2a71d0']
+              backgroundColor:['#2a71d0'],
             },
           ],
         }

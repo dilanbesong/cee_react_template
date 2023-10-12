@@ -8,7 +8,7 @@ const HomeNav = () => {
         <nav className="homeNavBar" onClick={() => navigate('/home/profile', {state:user._id})}>
             <div className="logo">
                 <img src='https://tse2.mm.bing.net/th?id=OIP.Oprpe36XqXLL_HjlF04i2QAAAA&pid=Api&P=0&h=180' alt="esutlogo"/>
-                <span>CEE @INFO </span>
+                <span> CEE 🕊️   </span>
             </div>
             <div className="nav_user">
                 <span>{user.username}</span>

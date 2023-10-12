@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ThreeCircles, ThreeDots } from "react-loader-spinner";
+import { mutualArray } from "./mutalAray";
 
 const SentFriendRequest = () => {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ const SentFriendRequest = () => {
                   />
                   <div className="friendCardInfo">
                     <strong>{request.username}</strong>
-                    <p> 0 mutual friends </p>
+                    <p> {mutualArray(user.FriendList, requester.FriendList)} mutual friends </p>
                   </div>
                   <div className="friendCardButton">
                     <button

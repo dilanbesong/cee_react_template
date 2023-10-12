@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ThreeCircles } from 'react-loader-spinner'
+import {  mutualArray } from './mutalAray'
 const FriendList = () => {
    const navigate = useNavigate()
    const [friendList, setFriendList ] = useState([])
@@ -43,7 +44,7 @@ const FriendList = () => {
                      <img src={friend.profileImage} onClick={() => navigate('/home/profile', { state: friend._id })} className="friendImg" alt="" /> 
                       <div className="friendCardInfo"> 
                          <strong>{friend.username}</strong>
-                         <p>0 mutual friends</p>
+                         <p> { mutualArray(user.FriendList, friend.FriendList )} mutual friends</p>
                       </div>
                       <div className="friendCardButton">
                            <button onClick={ () => removeFriend(friend._id)}> cancel</button>        

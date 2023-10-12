@@ -21,12 +21,13 @@ const FriendChat = () => {
   }
 
   function handleSearch(){
-      console.log(searchInput);
       const searchResults = friendList.filter( ({ username, regNumber}) => {
         return username.toLowerCase().includes(searchInput.toLowerCase()) || regNumber.includes(searchInput)
       })
       setFriendList(searchResults)
   }
+
+  
 
   useEffect(() => { handleSearch() }, [searchInput]);
   useEffect(() => {
@@ -68,11 +69,11 @@ const FriendChat = () => {
                       <img src={friend.profileImage} alt="esutlogo" />
                       <div className="name_msg">
                         <span>{friend.username}</span>
-                        <span>Good morning everyone hope ...</span>
+                        <span style={{color:'grey'}}>{friend.regNumber}</span>
                       </div>
                     </div>
                     <div className="timer_new_msg">
-                      <span>7:30am</span>
+                      {/* <span>7:30am</span> */}
                       <span className="new_msg_dot"></span>
                     </div>
                   </article>

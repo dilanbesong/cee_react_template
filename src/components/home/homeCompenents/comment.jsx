@@ -5,19 +5,24 @@ import { ThreeDots } from "react-loader-spinner";
 import { useEffect } from "react";
 import axios from "axios";
 
-let userObj = JSON.parse(sessionStorage.getItem('user'))
 
-export function MyComment(text) {
-  this._id = new Date().getTime().toString();
-  this.body = text;
-  this.commentorId = userObj ? userObj.user._id : '1'
-  this.reply = new Array();
-}
+
+
 
 const Comment = ({ postId, postComments }) => {
+
+
   const [commentsArr, setCommentsArr] = useState(postComments);
   const [commentInput, setCommentInput] = useState(null);
   const [isLoadComment, setIsLoadComment] = useState(false);
+  let userObj = JSON.parse(sessionStorage.getItem('user'))
+
+  function MyComment(text) {
+  this._id = new Date().getTime().toString();
+  this.body = text;
+  this.commentorId =  userObj.user._id 
+  this.reply = new Array();
+}
   
   const addComment = (e) => {
     commentsArr.push(new MyComment(commentInput));
@@ -36,7 +41,7 @@ const Comment = ({ postId, postComments }) => {
       setIsLoadComment(false);
       return;
     }
-    alert(data.msg);
+   // alert(data.msg);
   }
 
   // useEffect(() => {

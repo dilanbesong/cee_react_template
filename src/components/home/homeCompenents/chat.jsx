@@ -8,7 +8,7 @@ import { usePoster } from "../usePoster";
 import {  VoiceNote } from "./filegrid";
 import { timeAgo, convertTime } from "./createPost";
 import socket from "socket.io-client";
-const io = socket.connect("http://localhost:5000" || "https://cee-info.onrender.com");
+const io = socket.connect(  "http://localhost:5000" || "https://cee-info.onrender.com" );
 
 
 const Chat = () => {

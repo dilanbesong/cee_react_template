@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { ThreeCircles } from "react-loader-spinner";
+import { mutualArray } from "./mutalAray";
 const FriendRequest = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -73,7 +74,7 @@ const FriendRequest = () => {
                   />
                   <div className="acceptDeclineDiv">
                     <strong>{requester.username}</strong>
-                    <p>0 mutual friends</p>
+                    <p>{mutualArray(user.FriendList, requester.FriendList)} mutual friends</p>
                     <div className="acceptDeclineButtons">
                       <button onClick={() => rejectFriendRequest(requester._id) }>Decline</button>
                       <button className="acceptFriend" onClick={() => acceptFriendRequest(requester._id) }>Accept</button>

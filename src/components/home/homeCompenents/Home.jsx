@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Post from "./post";
 import { Circles, ThreeCircles, ThreeDots } from "react-loader-spinner";
 
-const socket = io.connect("http://localhost:5000" || "https://cee-info.onrender.com");
+const socket = io.connect( "https://cee-info.onrender.com" || "http://localhost:5000");
 
 const Home = () => {
   const navigate = useNavigate();
@@ -91,11 +91,9 @@ async function loadMoreCards(){
     const lastCardObserver = new IntersectionObserver( entries => {
         const lastCard = entries[0]
        setIsLastCard(lastCard.isIntersecting)
-        if(lastCard.isIntersecting){
+        if(!lastCard.isIntersecting) return
            loadMoreCards()
            lastCardObserver.unobserve(lastCard.target)
-           return
-        }
          
     })
     const lastCard = allPostEle.current.lastChild

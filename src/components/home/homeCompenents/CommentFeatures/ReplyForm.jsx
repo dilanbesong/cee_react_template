@@ -5,10 +5,7 @@ export const ReplyForm = ({
   addComment,
   isReply
 }) => {
-  // if(commentInput == ''){
-  //   alert('Inpu field cannot be empty!!!')
-  //   return
-  // }
+ 
   return (
     <>
       <div className="main_comment_form">

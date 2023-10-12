@@ -98,8 +98,8 @@ const ViewPost = () => {
                 <div>
                   <ul className="modify_post">
                     { (post.poster == user._id || user.isAdmin ) && <>
-                        <li onClick={() => navigate(`/home/editPost/${id}`)}>Edit</li>
-                        <li onClick={() => deletePost(id)}>Delete</li>
+                        <li onClick={() => navigate(`/home/editPost/${id}`)}>Edit <i className="fa fa-edit"></i></li>
+                        <li onClick={() => deletePost(id)}>Delete <i className="fa fa-trash"></i></li>
                     </>}
                   </ul>
                 </div>

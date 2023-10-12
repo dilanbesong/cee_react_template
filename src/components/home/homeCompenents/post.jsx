@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ThreeDots,  InfinitySpin } from "react-loader-spinner";
 import { usePoster } from "../usePoster";
 import { formateText } from '../textFormate'
+import { mutualArray } from "./mutalAray";
 const Post = ({
   _id,
   body,
@@ -72,13 +73,13 @@ const Post = ({
 
 
 
-  const SuggCard = ({ username, _id, profileImage }) => {
+  const SuggCard = ({ username, _id, profileImage, FriendList }) => {
     return (
       <article key={_id} className="sugg_card">
         <div className="sugg_img">
           <img src={profileImage} alt="esutlogo" />
           <p>{username}</p>
-          <p>0 mutual mates</p>
+          <p>{mutualArray(user.FriendList, FriendList)} mutual mates</p>
         </div>
         <div className="sugg_btns">
           <button>add</button>

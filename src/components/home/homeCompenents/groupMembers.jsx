@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Circles } from "react-loader-spinner";
+import { mutualArray } from "./mutalAray";
 
 const GroupMembers = () => {
   const navigate = useNavigate();
   const userId = JSON.parse(sessionStorage.getItem("user")).user._id;
+  const user = JSON.parse(sessionStorage.getItem('user')).user
   const { state } = useLocation(); // This is the group Id
   const [groupMembers, setGroupMembers] = useState([]);
   const [group, setGroup] = useState(null);
@@ -14,10 +16,9 @@ const GroupMembers = () => {
   async function getGroupMembers() {
     
     const { data } = await axios.get(`/api/group/getALLGroupMembers/${state}`);
-    console.log(data)
+  
     if (data.groupMembers) {
       setGroupMembers(data.groupMembers)
-      console.log(data.groupMembers);
       setLoading(false);
       return;
     }
@@ -89,7 +90,7 @@ const GroupMembers = () => {
                 />
                 <div className="friendCardInfo">
                   <strong>{member.username}</strong>
-                  <p>2 mutual friends</p>
+                  <p> { mutualArray(user.FriendList, member.FriendList )} mutual friends</p>
                 </div>
                 <div className="friendCardButton">
                   {group.groupcreator == userId && (

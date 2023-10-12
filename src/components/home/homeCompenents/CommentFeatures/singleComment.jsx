@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ReplyForm } from "./ReplyForm";
-import { MyComment } from "../comment";
 import axios from "axios";
 import { useGlobalContext } from "../../../../context";
 import { usePoster } from "../../usePoster";
@@ -12,6 +11,7 @@ const SingleComment = ({ comment, setCommentsArr, commentsArr, postId }) => {
   const [isReply, setIsReply] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [replyInput, setIsReplyInput] = useState("");
+  
 
   const addReply = (e) => {
     async function addReply(parentId, text) {
@@ -21,6 +21,7 @@ const SingleComment = ({ comment, setCommentsArr, commentsArr, postId }) => {
             comment.reply.push({
               _id: Date.now(), // You can generate a unique ID here
               body: text,
+              commentorId,
               reply: [],
             });
             return true;
@@ -40,10 +41,9 @@ const SingleComment = ({ comment, setCommentsArr, commentsArr, postId }) => {
           postId,
           commentsObj: commentsArr,
         });
-        if (data.length) setCommentsArr(data);
+  
         return;
-      } else {
-        //console.log(`Parent with ID ${parentId} not found`);
+      } else {//console.log(`Parent with ID ${parentId} not found`); 
       }
     }
     addReply(e.target.id, replyInput);
@@ -70,14 +70,17 @@ const SingleComment = ({ comment, setCommentsArr, commentsArr, postId }) => {
     setCommentsArr(data);
   };
   const deleteComment = async (commentId) => {
+    
     function deleteCmd(commentsArr, commentId) {
       for (let i = 0; i < commentsArr.length; i++) {
+         
         const obj = commentsArr[i];
         if (obj._id === commentId) {
           commentsArr.splice(i, 1);
           return commentsArr;
         } else if (obj.reply && obj.reply.length > 0) {
           const deleted = deleteCmd(obj.reply, commentId);
+        
           if (deleted) {
             return commentsArr;
           }
@@ -85,16 +88,18 @@ const SingleComment = ({ comment, setCommentsArr, commentsArr, postId }) => {
       }
       return commentsArr;
     }
-
+    console.log(commentsArr);
     const newCommentsArr = deleteCmd(commentsArr, commentId);
-    setCommentsArr(newCommentsArr);
+    
     const { data } = await axios.put("/api/comment/deleteComment", {
       postId,
       commentorId,
       commentsArr: newCommentsArr,
     });
-    setCommentsArr(data);
+    
   };
+
+ 
 
   const whoCommented = usePoster( comment ? comment.commentorId : 'CEE')
 
