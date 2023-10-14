@@ -4,10 +4,13 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 //"http://localhost:5000"
 export default defineConfig({
+  build: {
+    base: "/",
+  },
   server: {
     proxy: {
       "/api": {
-        target: "https://cee-info.onrender.com" || "http://localhost:5000",
+        target: "https://cee-info.onrender.com/" || "http://localhost:5000",
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace("/api", ""),
