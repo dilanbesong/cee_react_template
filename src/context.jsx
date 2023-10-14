@@ -18,7 +18,7 @@ export const AppProvider = ({ children }) => {
    
     try {
       const { data } = await axios.get('/api/user')
-     
+       console.log(data);
      function onSuccess(pos) {
         const { latitude, longitude } = pos.coords;
         setState(state => {

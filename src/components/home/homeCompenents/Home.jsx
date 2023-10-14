@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Post from "./post";
 import { Circles, ThreeCircles, ThreeDots } from "react-loader-spinner";
 
-const socket = io.connect( "https://cee-info.onrender.com" || "http://localhost:5000");
+const socket = io.connect( "https://cee-info.onrender.com" || "http://localhost:5000" );
 
 const Home = () => {
   const navigate = useNavigate();
