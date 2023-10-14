@@ -69,7 +69,11 @@ const Profile = () => {
     const {
       data: { DepartmentalFees },
     } = await axios.get("/api/payment/getReciepts");
-    setReciept(DepartmentalFees);
+    if(DepartmentalFees){
+       setReciept(DepartmentalFees);
+       return
+    }
+   
   }
   useEffect(() => {
     getMyPost();
@@ -117,9 +121,7 @@ const Profile = () => {
     }px)`;
   };
 
-  console.log(state == user._id);
-  console.log(id, state, user._id);
-  
+ 
   return (
     <>
       {isProfileLoading ? (

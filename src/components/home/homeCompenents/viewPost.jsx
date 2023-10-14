@@ -18,11 +18,12 @@ const ViewPost = () => {
   const [post, setPost] = useState(null);
   const postText = useRef()
   const [postLikes, setPostLikes ] = useState(0)
+  const [isLiked, setIsLike ] = useState(false)
   const [ student, setStudent ] = useState(JSON.parse(sessionStorage.getItem('user')))
   const { user } = student
   const [loadpost, setLoadPost] = useState(true);
   const { id } = useParams();
-  
+  const likeEle = useRef()
   async function specificPost() {
     const { data } = await axios.post(`/api/post/viewPost`, { postId: id });
     if (data.body) {
@@ -65,6 +66,21 @@ const ViewPost = () => {
   }
 
   const handleLikePost = async (postId) => {
+    
+     setPostLikes( postLikes => {
+      setIsLike(!isLiked)
+     
+       if(isLiked){
+        likeEle.current.style.color = 'brown'
+         return postLikes + 1
+          
+       }else{
+         likeEle.current.style.color = 'black'
+          return postLikes - 1 
+       }
+       
+     })
+
      const { data } = await axios.post('/api/post/likePost', { postId, userId:user._id })
      setPostLikes(data.length)
   }
@@ -155,7 +171,7 @@ const ViewPost = () => {
               <div className="number_of_comments">{f.format(post.Comments.length)} Comments</div>
               <section className="post_reactions">
                 <span onClick={ () => handleLikePost(post._id) }>
-                  <i className="fa fa-heart" aria-hidden="true"></i> Love {f.format(postLikes)}
+                  <i className="fa fa-heart" style={{ color: post.Likes.includes(user._id) ? 'brown' : 'black' } } aria-hidden="true" ref={likeEle}></i> Love {f.format(postLikes)}
                 </span>
                 <span>
                   <i className="fa fa-comment" aria-hidden="true"></i> Comment
