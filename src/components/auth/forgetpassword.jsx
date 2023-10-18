@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const ForgottenPassword = ({ authSlideContainer }) => {
   const forgottenPasswordForm = useRef();
+  const emailEleInput = useRef()
   const [reset, setReset] = useState({ email: "", otp: "", password: "" });
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
@@ -46,9 +47,8 @@ const ForgottenPassword = ({ authSlideContainer }) => {
   }
   const handleReset = (e) => {
     e.preventDefault();
-
+   if(emailEleInput.current.value == '') return
     if (e.target.value == "verify") {
-      console.log('gen reset code here');
       generateResetCode();
     }
     if (e.target.value == "reset password") {
@@ -85,6 +85,7 @@ const ForgottenPassword = ({ authSlideContainer }) => {
               name="email"
               onChange={handleResetInput}
               placeholder="enter email ..."
+              ref={emailEleInput}
               required
             />
           </div>

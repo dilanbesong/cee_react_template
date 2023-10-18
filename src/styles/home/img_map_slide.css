@@ -43,10 +43,14 @@
   height: inherit;
   text-align: center;
   border: 1px solid #ccc;
+  background-color: rgba(255, 248, 222, 1);
 }
 .imgSlider  article.fileContainer img, video {
    display: block;
    object-fit:cover;
+   width: 100%;
+   margin: 0 auto;
+   height: 100%;
 }
 .btn_left, .btn_right {
    position: absolute;

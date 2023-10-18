@@ -6,11 +6,12 @@ import axios from "axios";
 import { BarChart, BoysVsGirlsGraph, OnlineGraph } from "./chart";
 import { ThreeDots } from "react-loader-spinner";
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:5000" || "https://cee-info.onrender.com");
+ const socket = io.connect("http://localhost:5000");
 
 const Levels = ["100", "200", "300", "400", "500"];
 
 const AdminPanel = () => {
+ 
   const navigate = useNavigate();
   const user = JSON.parse(sessionStorage.getItem("user")).user;
   const [loading, setLoading] = useState(false);
@@ -23,11 +24,12 @@ const AdminPanel = () => {
   const [isLoadPayment, setIsLoadPayment ] = useState(true)
   const [onlineUsers, setOnlineUsers ] = useState([])
 
-useEffect( () => {
-   socket.on("online", (activeUsers) => {
+
+   socket.on("status", (activeUsers) => {
+    console.log(activeUsers)
     setOnlineUsers(activeUsers)
   });
-})
+
 
   async function getYears() {
     const { data } = await axios.get("/api/adminPanel/getYearOptions");
@@ -50,7 +52,6 @@ useEffect( () => {
   async function searchPayment(refNumber){ 
 
     const { data } = await axios.get(`/api/payment/searchPayments/${refNumber}`)
-    console.log(data);
     if(data.length){
       setIsLoadPayment(false)
       setPaymentList(data)

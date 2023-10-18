@@ -170,8 +170,9 @@ const CreatePost = () => {
       }
 
       const { data } = await axios.post("/api/post/createPost", post); // data is pointing to the post
-      const createNotification = await axios.post('/api/createNotification', { notificatorId:data.poster, postId:data._id } )
+      // await axios.post('/api/createNotification', { notificatorId:data.poster, postId:data._id } )
         // createNotification.isNotify
+        console.log(data);
       if (data) {
          toast.success("post successfully created..", {
           duration:4000,

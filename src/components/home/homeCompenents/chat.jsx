@@ -8,7 +8,9 @@ import { usePoster } from "../usePoster";
 import {  VoiceNote } from "./filegrid";
 import { timeAgo, convertTime } from "./createPost";
 import socket from "socket.io-client";
-const io = socket.connect( "https://cee-info.onrender.com" || "http://localhost:5000"   );
+//"https://cee-info.onrender.com"
+//http://localhost:5000
+const io = socket.connect("https://cee-info.onrender.com");
 
 
 const Chat = () => {
@@ -103,6 +105,7 @@ const Chat = () => {
   }
 
   async function deleteOneChat(messageId) {
+    
     const isConfirm = confirm("Do you want to delete this message ?");
     if (isConfirm) {
       const { data } = await axios.put("/api/chat/deleteOneChat", {

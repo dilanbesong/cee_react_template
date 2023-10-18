@@ -5,8 +5,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Post from "./post";
 import { Circles, ThreeCircles, ThreeDots } from "react-loader-spinner";
-
-const socket = io.connect( "https://cee-info.onrender.com" || "http://localhost:5000" );
+// "https://cee-info.onrender.com"
+//http://localhost:3000
+const socket = io.connect("https://cee-info.onrender.com");
 
 const Home = () => {
   const navigate = useNavigate();
@@ -53,19 +54,19 @@ const Home = () => {
   };
 
   async function getPost() {
-    //const { data } = await axios.get("/api/post/getAllPost");
+    const { data } = await axios.get("/api/post/getAllPost");
   // let [skipCount, postLimit ] = [ 0, 2]
    
-   const { data } = await axios.get(`/api/post/sequenciallyFetchPost/${skipCount}/${postLimit}`)
+   //const { data } = await axios.get(`/api/post/sequenciallyFetchPost/${skipCount}/${postLimit}`)
     if (data.posts) {
       setPosts(data.posts);
       setPostLoading(false);
       return;
     }
   }
-  useEffect(() => {
-    caterogicallySearchPost();
-  }, [postcategory]);
+  // useEffect(() => {
+  //   caterogicallySearchPost();
+  // }, [postcategory]);
 
   useEffect(() => {
     getPost();
@@ -74,32 +75,32 @@ const Home = () => {
 
 
 
-async function loadMoreCards(){
-    setSkipCount(skipCount => skipCount + 1)
-    setPostLimit(postLimit => postLimit + 5)
-    const { data } = await axios.get(`/api/post/sequenciallyFetchPost/${skipCount}/${postLimit}`)
-    if(data.posts){
-       setPosts( posts => {
-          return [...posts, ...data.posts]
-       })
-      return
-    }
-    alert(data.err)  
-  }
-  const [isLastCard, setIsLastCard ] = useState(false)
-  useEffect( () => {
-    const lastCardObserver = new IntersectionObserver( entries => {
-        const lastCard = entries[0]
-       setIsLastCard(lastCard.isIntersecting)
-        if(!lastCard.isIntersecting) return
-           loadMoreCards()
-           lastCardObserver.unobserve(lastCard.target)
+// async function loadMoreCards(){
+//     setSkipCount(skipCount => skipCount + 1)
+//     setPostLimit(postLimit => postLimit + 5)
+//     const { data } = await axios.get(`/api/post/sequenciallyFetchPost/${skipCount}/${postLimit}`)
+//     if(data.posts){
+//        setPosts( posts => {
+//           return [...posts, ...data.posts]
+//        })
+//       return
+//     }
+//     alert(data.err)  
+//   }
+  //const [isLastCard, setIsLastCard ] = useState(false)
+  // useEffect( () => {
+  //   const lastCardObserver = new IntersectionObserver( entries => {
+  //       const lastCard = entries[0]
+  //      setIsLastCard(lastCard.isIntersecting)
+  //       if(!lastCard.isIntersecting) return
+  //          loadMoreCards()
+  //          lastCardObserver.unobserve(lastCard.target)
          
-    })
-    const lastCard = allPostEle.current.lastChild
-    lastCardObserver.observe(lastCard)
+  //   })
+  //   const lastCard = allPostEle.current.lastChild
+  //   lastCardObserver.observe(lastCard)
     
-  }, [isLastCard])
+  // }, [isLastCard])
 
 
 
