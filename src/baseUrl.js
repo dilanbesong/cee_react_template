@@ -1,0 +1,1 @@
+export const BASEURL = "https://cee-info.onrender.com";

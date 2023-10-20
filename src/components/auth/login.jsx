@@ -5,6 +5,7 @@ import toast, {  Toaster } from "react-hot-toast"
 import axios from 'axios'
 import { useGlobalContext } from "../../context"
 import {  useNavigate } from "react-router-dom"
+import { BASEURL } from "../../baseUrl"
 
 
 const Login = ({ authSlideContainer }) => {
@@ -24,7 +25,7 @@ const Login = ({ authSlideContainer }) => {
    const handleLogin = async (e) => {
      e.preventDefault()
      setIsSubmit(true)
-    const { data } = await axios.post(`${VITE_BACKEND_BASE_URL}/login`, login)
+    const { data } = await axios.post(`${BASEURL}/login`, login)
 
     console.log(data);
     

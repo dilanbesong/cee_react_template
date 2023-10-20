@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, useContext } from "react";
 import axios from 'axios';
-
+import { BASEURL } from "./baseUrl";
 
 
 const AppContext = createContext();
@@ -17,7 +17,7 @@ export const AppProvider = ({ children }) => {
   const fetchUserInformation = async () => {
    
     try {
-      const { data } = await axios.get('/api/user')
+      const { data } = await axios.get(`${BASEURL}/user`)
        console.log(data);
      function onSuccess(pos) {
         const { latitude, longitude } = pos.coords;
