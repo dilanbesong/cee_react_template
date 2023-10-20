@@ -7,7 +7,7 @@ import Post from "./post";
 import { Circles, ThreeCircles, ThreeDots } from "react-loader-spinner";
 // "https://cee-info.onrender.com"
 //http://localhost:3000
-const socket = io.connect("http://localhost:3000");
+const socket = io.connect("https://cee-info.onrender.com");
 
 const Home = () => {
   const navigate = useNavigate();

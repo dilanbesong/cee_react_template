@@ -10,7 +10,7 @@ import { timeAgo, convertTime } from "./createPost";
 import socket from "socket.io-client";
 //"https://cee-info.onrender.com"
 //http://localhost:5000
-const io = socket.connect("http://localhost:3000");
+const io = socket.connect("https://cee-info.onrender.com");
 
 
 const Chat = () => {
