@@ -8,13 +8,14 @@ import {  useNavigate } from "react-router-dom"
 
 
 const Login = ({ authSlideContainer }) => {
+  const { VITE_BACKEND_BASE_URL } = import.meta.env
    const loginForm = useRef(null)
    const navigate = useNavigate()
    const [login, setLogin ] = useState({ email:'', password:''})
    const [isSubmit, setIsSubmit ] = useState(false)
    const [isLogin, setIsLogin ] = useState(false)
    const { setState } = useGlobalContext()
-  console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
+  
 
    const handleLoginInput = (e) => {
       const { name, value } = e.target
@@ -23,9 +24,9 @@ const Login = ({ authSlideContainer }) => {
    const handleLogin = async (e) => {
      e.preventDefault()
      setIsSubmit(true)
-    const { data } = await axios.post('/api/login', login)
+    const { data } = await axios.post(`${VITE_BACKEND_BASE_URL}/login`, login)
 
-    
+    console.log(data);
     
     if(data['user'] && data['user'].isBlocked == false){
        setIsLogin(true)
