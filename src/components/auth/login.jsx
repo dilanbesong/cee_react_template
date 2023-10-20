@@ -14,7 +14,7 @@ const Login = ({ authSlideContainer }) => {
    const [isSubmit, setIsSubmit ] = useState(false)
    const [isLogin, setIsLogin ] = useState(false)
    const { setState } = useGlobalContext()
-  
+  console.log(import.meta.env.VITE_GOOGLE_MAP_API_KEY);
 
    const handleLoginInput = (e) => {
       const { name, value } = e.target
