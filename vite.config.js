@@ -9,15 +9,15 @@ export default defineConfig({
   build: {
     base: "/",
   },
-  server: {
-    proxy: {
-      "/api": {
-        target: "https://cee-info.onrender.com",
-        changeOrigin: true,
-        secure: false,
-        rewrite: (path) => path.replace("/api", ""),
-      },
-    },
-  },
+  // server: {
+  //   proxy: {
+  //     "/api": {
+  //       target: "https://cee-info.onrender.com",
+  //       changeOrigin: true,
+  //       secure: false,
+  //       rewrite: (path) => path.replace("/api", ""),
+  //     },
+  //   },
+  // },
   plugins: [react()],
 });
