@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { BASEURL } from "../../baseUrl";
 const Register = () => {
   const [user, setUser] = useState({
     username: "",
@@ -24,7 +25,7 @@ const Register = () => {
   const handleSignUp = async (e) => {
      e.preventDefault()
      try {
-         const { data } = await axios.post('/api/register', user)
+         const { data } = await axios.post(`${BASEURL}/register`, user)
          if(data['errorMessage']){
             alert(data.errorMessage)
             return

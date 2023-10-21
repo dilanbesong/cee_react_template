@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ThreeCircles, ThreeDots } from "react-loader-spinner";
 import { mutualArray } from "./mutalAray";
-
+import { BASEURL } from "../../../baseUrl";
 const SentFriendRequest = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ const SentFriendRequest = () => {
   const user = JSON.parse(sessionStorage.getItem('user')).user
 
   async function cancelOneSentFriendRequest(friendId) {
-    const { data } = await axios.put("/api/cancelOneSentFriendRequest", {
+    const { data } = await axios.put(`${BASEURL}/cancelOneSentFriendRequest`, {
       friendId,
     });
     if (data.friendId) {
@@ -30,7 +30,7 @@ const SentFriendRequest = () => {
     }
   }
   async function getSentFriendRequest() {
-    const { data } = await axios.get(`/api/getAllmySentFriendRequest/${user._id}`);
+    const { data } = await axios.get(`${BASEURL}/getAllmySentFriendRequest/${user._id}`);
     if (data.SentFriendRequestList) {
       setLoading(false);
       setSentFriendRequestList(data.SentFriendRequestList);

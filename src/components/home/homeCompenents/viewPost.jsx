@@ -10,7 +10,7 @@ import { AudioPlayer } from "react-audio-player-component";
 import { timeAgo } from "./createPost";
 import { usePoster } from "../usePoster";
 import { formateText } from "../textFormate";
-
+import { BASEURL } from "../../../baseUrl";
 const ViewPost = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
@@ -25,7 +25,7 @@ const ViewPost = () => {
   const { id } = useParams();
   const likeEle = useRef()
   async function specificPost() {
-    const { data } = await axios.post(`/api/post/viewPost`, { postId: id });
+    const { data } = await axios.post(`${BASEURL}/post/viewPost`, { postId: id });
     if (data.body) {
       setLoadPost(false);
       setPost(data);
@@ -40,7 +40,7 @@ const ViewPost = () => {
   }, [id])
 
         async function getViews(){
-           const { data } = await axios.post('/api/post/numberOFviews', { postId:id })
+           const { data } = await axios.post(`${BASEURL}/post/numberOFviews`, { postId:id })
             setPost( post => {
              return {...post, views:data }
             })
@@ -55,7 +55,7 @@ const ViewPost = () => {
   const deletePost = async (postId) => {
     let ok = confirm('Do you want to delete this post')
     if(ok){
-      const { data } = await axios.delete(`/api/post/deletePost/${postId}/${user._id}`)
+      const { data } = await axios.delete(`${BASEURL}/post/deletePost/${postId}/${user._id}`)
      if(data.deletePost){
        alert('Post has been deleted')
        navigate('/home/main')
@@ -81,7 +81,7 @@ const ViewPost = () => {
        
      })
 
-     const { data } = await axios.post('/api/post/likePost', { postId, userId:user._id })
+     const { data } = await axios.post(`${BASEURL}/post/likePost`, { postId, userId:user._id })
      setPostLikes(data.length)
   }
 

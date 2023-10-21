@@ -4,7 +4,7 @@ import SingleComment from "./CommentFeatures/singleComment";
 import { ThreeDots } from "react-loader-spinner";
 import { useEffect } from "react";
 import axios from "axios";
-
+import { BASEURL } from "../../../baseUrl";
 
 
 
@@ -31,7 +31,7 @@ const Comment = ({ postId, postComments }) => {
   };
 
   async function createComment() {
-    const { data } = await axios.post("/api/comment/createComment", {
+    const { data } = await axios.post(`${BASEURL}/comment/createComment`, {
       postId,
       commentsObj: commentsArr,
     });

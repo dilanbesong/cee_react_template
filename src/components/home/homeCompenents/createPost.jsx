@@ -9,7 +9,7 @@ import toast, {Toaster} from 'react-hot-toast'
 import Post from "./post";
 import { useGlobalContext } from "../../../context";
 import { usePoster } from "../usePoster";
-
+import { BASEURL } from "../../../baseUrl";
 export function timeAgo(value) {
   const seconds = Math.floor(
     (new Date().getTime() - new Date(value).getTime()) / 1000
@@ -158,7 +158,7 @@ const CreatePost = () => {
     try {
          console.log(post);
       if (isEdit) {
-        const { data } = await axios.put("/api/post/editPost", post);
+        const { data } = await axios.put(`${BASEURL}/post/editPost`, post);
         if (data.isEdit) toast.success("post successfully edited..", {
           duration:4000,
           style:{
@@ -169,7 +169,7 @@ const CreatePost = () => {
         return;
       }
 
-      const { data } = await axios.post("/api/post/createPost", post); // data is pointing to the post
+      const { data } = await axios.post(`${BASEURL}/post/createPost`, post); // data is pointing to the post
       // await axios.post('/api/createNotification', { notificatorId:data.poster, postId:data._id } )
         // createNotification.isNotify
         console.log(data);
@@ -199,7 +199,7 @@ const CreatePost = () => {
   useEffect(() => {
     if (isEdit) {
       async function getPost() {
-        const { data } = await axios.post(`/api/post/viewPost`, { postId: id });
+        const { data } = await axios.post(`${BASEURL}/post/viewPost`, { postId: id });
         console.log(data);
         setPost({
           body: data.body,

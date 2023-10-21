@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Post from "./post";
 import { Circles, ThreeCircles, ThreeDots } from "react-loader-spinner";
+import { BASEURL } from "../../../baseUrl";
 // "https://cee-info.onrender.com"
 //http://localhost:3000
 const socket = io.connect("https://cee-info.onrender.com");
@@ -38,14 +39,14 @@ const Home = () => {
 
   const findPost = async (e) => {
     setSearchInput(e.target.value);
-    const { data } = await axios.get(`/api/post/searchPost/${searchInput}`);
+    const { data } = await axios.get(`${BASEURL}/post/searchPost/${searchInput}`);
     if (data[0]) {
       setPostLoading(false);
       setPosts(data);
     }
   };
   const caterogicallySearchPost = async () => {
-    const { data } = await axios.get(`/api/post/searchPost/${postcategory}`);
+    const { data } = await axios.get(`${BASEURL}/post/searchPost/${postcategory}`);
     setPostLoading(true);
     if (data[0]) {
       setPostLoading(false);
@@ -54,7 +55,7 @@ const Home = () => {
   };
 
   async function getPost() {
-    const { data } = await axios.get("/api/post/getAllPost");
+    const { data } = await axios.get(`${BASEURL}/post/getAllPost`);
   // let [skipCount, postLimit ] = [ 0, 2]
    
    //const { data } = await axios.get(`/api/post/sequenciallyFetchPost/${skipCount}/${postLimit}`)

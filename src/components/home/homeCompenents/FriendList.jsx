@@ -3,13 +3,16 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ThreeCircles } from 'react-loader-spinner'
 import {  mutualArray } from './mutalAray'
+import { BASEURL } from "../../../baseUrl";
+
+
 const FriendList = () => {
    const navigate = useNavigate()
    const [friendList, setFriendList ] = useState([])
    const [loading, setLoading] = useState(true)
     const user = JSON.parse(sessionStorage.getItem('user')).user
    async function getMyFriends(){
-      const { data } = await axios.get(`/api/friends/${user._id}`)
+      const { data } = await axios.get(`${BASEURL}/friends/${user._id}`)
       if(data.Friends){
          setLoading(false)
          setFriendList(data.Friends)
@@ -20,7 +23,7 @@ const FriendList = () => {
    }, [])
 
    const removeFriend = async (friendId) => {
-      const { data } = await axios.delete(`/api/deleteOneFriend/${friendId}`)
+      const { data } = await axios.delete(`${BASEURL}/deleteOneFriend/${friendId}`)
       if(data.Friends){
          setFriendList( friendList => {
             return friendList.filter( friend =>  friend._id !== friendId)

@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { CirclesWithBar } from 'react-loader-spinner'
 
-
+import { BASEURL } from '../../../baseUrl'
 const MyGroups = () => {
    const navigate = useNavigate()
    const [ mygroups, setMyGroups ] = useState([])
    const [isloading, setIsLoading] = useState(true)
    async function getMyGroups(){
-      const { data } = await axios.get('/api/getMyGroups')
+      const { data } = await axios.get(`${BASEURL}/getMyGroups`)
       console.log(data);
       if(data.GroupList.length >= 1) {
           setMyGroups(data.GroupList)

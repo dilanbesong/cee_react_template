@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { BASEURL } from "../../baseUrl";
 export const usePoster = (posterId) => {
   const [poster, setPoster] = useState({
     posterImage: "",
@@ -11,7 +11,7 @@ export const usePoster = (posterId) => {
   });
   const [ showPoster, setShowPoster ] = useState(false)
   async function getPoster(){
-    const { data } = await axios.get(`/api/post/getPoster/${posterId}`)
+    const { data } = await axios.get(`${BASEURL}/post/getPoster/${posterId}`)
     if(data.posterName){
        setShowPoster(true)
        setPoster(data)

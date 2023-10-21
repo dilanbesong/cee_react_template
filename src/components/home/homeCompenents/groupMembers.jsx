@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Circles } from "react-loader-spinner";
 import { mutualArray } from "./mutalAray";
+import { BASEURL } from "../../../baseUrl";
 
 const GroupMembers = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const GroupMembers = () => {
     // }
   }
   async function getGroup() {
-    const { data } = await axios.get(`/api/getGroup/${state}`);
+    const { data } = await axios.get(`${BASEURL}/getGroup/${state}`);
     if (data.groupName) {
       setGroup(data);
       getGroupMembers();
@@ -45,7 +46,7 @@ const GroupMembers = () => {
     );
     if (isDeleteMember) {
       const { data } = await axios.delete(
-        `/api/group/deleteOneMember/${memberId}`
+        `${BASEURL}/group/deleteOneMember/${memberId}`
       );
       if (data.length) {
         setGroupMembers((groupMembers) => {

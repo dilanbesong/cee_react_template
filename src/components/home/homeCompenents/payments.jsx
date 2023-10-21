@@ -4,7 +4,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { ThreeCircles } from 'react-loader-spinner';
 
-
+import { BASEURL } from '../../../baseUrl';
 
 
   
@@ -35,7 +35,7 @@ const Payments = () => {
     //Implementation for whatever you want to do with reference and after success call.
      const payer = { regNumber:user.regNumber || '', refNumber:reference, amount:5700, level:user.level || '' }
     
-    axios.post('/api/payment/makePayment', payer).then( ({ data}) => {
+    axios.post(`${BASEURL}/payment/makePayment`, payer).then( ({ data}) => {
       alert(data.msg)
     })
   };

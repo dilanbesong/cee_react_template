@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ThreeCircles } from "react-loader-spinner";
 import { usePoster } from "../usePoster";
+import { BASEURL } from "../../../baseUrl";
 
 const FriendChat = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const FriendChat = () => {
   const [searchInput, setSearchInput] = useState("");
   const user = JSON.parse(sessionStorage.getItem('user')).user
   async function getFriends() {
-    const { data } = await axios.get(`/api/chat/displayChatlist/${user._id}`);
+    const { data } = await axios.get(`${BASEURL}/chat/displayChatlist/${user._id}`);
     
     if (data.ChatList) {
       setLoading(false);

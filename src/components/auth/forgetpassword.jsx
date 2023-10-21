@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-
+import { BASEURL } from "../../baseUrl";
 const ForgottenPassword = ({ authSlideContainer }) => {
   const forgottenPasswordForm = useRef();
   const emailEleInput = useRef()
@@ -29,7 +29,7 @@ const ForgottenPassword = ({ authSlideContainer }) => {
   async function resetPassword() {
     const IsConfirm = confirm(`Check that the password ${reset.password} ok!`);
     if (IsConfirm) {
-      const { data } = await axios.put("/api/resetPassword", {
+      const { data } = await axios.put(`${BASEURL}/resetPassword`, {
         email:reset.email,
         resetCode: reset.otp,
         newPassword: reset.password,

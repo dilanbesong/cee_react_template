@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
+import { BASEURL } from "../../../baseUrl";
 const ProfileUpdate = () => {
   const { state } = useLocation() // userId
   
@@ -28,7 +29,7 @@ const ProfileUpdate = () => {
     })
   }
   async function getUser() {
-     const { data } = await axios.get(`/api/user/${state}`)
+     const { data } = await axios.get(`${BASEURL}/user/${state}`)
      if(data.email){
        setLoading(false)
        setProfileInfo(data)
@@ -65,7 +66,7 @@ const ProfileUpdate = () => {
   }
 
   const handleEdit = async () => {
-    const { data }  = await axios.put('/api/editProfile', profileInfo)
+    const { data }  = await axios.put(`${BASEURL}/editProfile`, profileInfo)
     sessionStorage.setItem('user', JSON.stringify(data))
     setProfileInfo(data.user)
   }
@@ -73,7 +74,7 @@ const ProfileUpdate = () => {
    const handleDeleteAccount = async (userId) => {
     const isConfirm = confirm('Are you sure you want to delete this account !')
     if(isConfirm){
-      const { data } = await axios.delete(`/api/adminPanel/deleteOneUser/${userId}`)
+      const { data } = await axios.delete(`${BASEURL}/adminPanel/deleteOneUser/${userId}`)
       if( data.isDelete){
         alert('This accpunt has been deleted from this plateform .....')
         navigate('/home/admin')

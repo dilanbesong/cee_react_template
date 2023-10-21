@@ -4,6 +4,7 @@ import { useGlobalContext } from "../../../context";
 import Post from "./post";
 import axios from "axios";
 import { ThreeDots, ThreeCircles } from "react-loader-spinner";
+import { BASEURL } from "../../../baseUrl";
 const Profile = () => {
   const user = JSON.parse(sessionStorage.getItem("user")).user;
   const [student, setStudent] = useState(null);
@@ -19,7 +20,7 @@ const Profile = () => {
 
 
   async function viewUser() {
-    const { data } = await axios.get(`/api/user/${state}`);
+    const { data } = await axios.get(`${BASEURL}/user/${state}`);
    
     setIsProfileLoading(true);
 
@@ -53,7 +54,7 @@ const Profile = () => {
   }
 
   async function getMyPost() {
-    const { data } = await axios.get(`/api/post/getMyPosts/${state || id}`);
+    const { data } = await axios.get(`${BASEURL}/post/getMyPosts/${state || id}`);
     setIsLoadPost(true);
     if (data.posts) {
       setIsLoadPost(false);
@@ -68,7 +69,7 @@ const Profile = () => {
   async function getDepartmentalReciept() {
     const {
       data: { DepartmentalFees },
-    } = await axios.get("/api/payment/getReciepts");
+    } = await axios.get(`${BASEURL}/payment/getReciepts`);
     if(DepartmentalFees){
        setReciept(DepartmentalFees);
        return
@@ -86,7 +87,7 @@ const Profile = () => {
   }, []);
 
   const sendFriendRequest = async () => {
-    const { data } = await axios.put("/api/sendFriendOneRequest", {
+    const { data } = await axios.put(`${BASEURL}/sendFriendOneRequest`, {
       friendId: student._id,
     });
     if (data.msg) {

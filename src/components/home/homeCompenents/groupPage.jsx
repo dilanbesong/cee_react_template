@@ -5,6 +5,7 @@ import { ThreeDots, ThreeCircles } from "react-loader-spinner";
 import { timeAgo } from "./createPost";
 import Post from "./post";
 import PhotoSlide from "./photoSlide";
+import { BASEURL } from "../../../baseUrl";
 
 const GroupPage = () => {
   const navigate = useNavigate();
@@ -45,12 +46,12 @@ const GroupPage = () => {
   }
 
   async function viewGroup() {
-    const { data } = await axios.get(`/api/getGroup/${id}`);
+    const { data } = await axios.get(`${BASEURL}/getGroup/${id}`);
     setIsLoadingGroup(false);
     setGroup(data)
   }
   async function getGroupPost() {
-    const { data } = await axios.get(`/api/getGroupPost/${id}`);
+    const { data } = await axios.get(`${BASEURL}/getGroupPost/${id}`);
     if (data.length >= 1) {
       setPosts(data);
       const groupFiles = data.map( post => post.fileList).flat(1)
@@ -74,7 +75,7 @@ const GroupPage = () => {
   }, []);
 
   const joinOrLeaveGroup = async (groupId) => {
-     const { data } = await axios.put('/api/joinGroup', { groupId })
+     const { data } = await axios.put(`${BASEURL}/joinGroup`, { groupId })
      setGroup(data)
      if(memberState == 'join'){
         setMemberState('You are a member')

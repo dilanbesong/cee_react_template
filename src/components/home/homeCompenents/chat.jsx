@@ -8,9 +8,10 @@ import { usePoster } from "../usePoster";
 import {  VoiceNote } from "./filegrid";
 import { timeAgo, convertTime } from "./createPost";
 import socket from "socket.io-client";
+import { BASEURL } from "../../../baseUrl";
 //"https://cee-info.onrender.com"
 //http://localhost:5000
-const io = socket.connect("https://cee-info.onrender.com");
+const io = socket.connect(BASEURL);
 
 
 const Chat = () => {
@@ -64,7 +65,7 @@ const Chat = () => {
     });
     setTimeout(() => (messageInputEle.current.value = ""), 100);
 
-    const { data } = await axios.post("/api/chat/saveChat", textMessage);
+    const { data } = await axios.post(`${BASEURL}/chat/saveChat`, textMessage);
   };
 
   const sendVoiceNote = () => {
@@ -94,7 +95,7 @@ const Chat = () => {
   }
 
   async function getChats() {
-    const { data } = await axios.get(`/api/chat/getChats/${state}/${user._id}`);
+    const { data } = await axios.get(`${BASEURL}/chat/getChats/${state}/${user._id}`);
 
     if (data.Conversions) {
       setLoading(false);
@@ -128,7 +129,7 @@ const Chat = () => {
   async function clearAllChats() {
     const isConfirm = confirm("Are you sure you want to clear all chats ");
     if (isConfirm) {
-      const { data } = await axios.put("/api/chat/clearChats", {
+      const { data } = await axios.put(`${BASEURL}/chat/clearChats`, {
         friendId: state,
         myId: user._id,
       });

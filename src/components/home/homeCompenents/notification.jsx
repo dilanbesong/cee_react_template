@@ -2,10 +2,10 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { ThreeDots, ThreeCircles } from "react-loader-spinner";
-import io from "socket.io-client";
 import { timeAgo } from "./createPost";
 import { usePoster } from "../usePoster";
 import toast, { Toaster } from "react-hot-toast";
+import { BASEURL } from "../../../baseUrl";
 //const socket = io.connect( "https://cee-info.onrender.com" || "http://localhost:5000" );
 
 
@@ -18,7 +18,7 @@ const Notifications = () => {
 
    
    async function getNotifications(){
-     const { data } = await axios.get(`/api/getNotification/${userId}`)
+     const { data } = await axios.get(`${BASEURL}/getNotification/${userId}`)
      console.log(data);
      if(data.NotificationList){
       setLoading(false)
@@ -29,7 +29,7 @@ const Notifications = () => {
    }
 
    async function searchNotifications(){
-     const { data } = await axios.get(`/api/searchNotifications/${searchInput}`)
+     const { data } = await axios.get(`${BASEURL}/searchNotifications/${searchInput}`)
      if(data.notificationResults){
        setLoading(false)
        setNotificationList(data.notificationResults)
@@ -50,7 +50,7 @@ const Notifications = () => {
       
       const IsConfirm = confirm('Do you really want to delete this notification ... ?')
       if(IsConfirm){
-        const { data } = await axios.put(`/api/deleteOneNotification`, { notificationId, userId } )
+        const { data } = await axios.put(`${BASEURL}/deleteOneNotification`, { notificationId, userId } )
          
         if(data.notificationId){
          
@@ -68,7 +68,7 @@ const Notifications = () => {
    const clearAllNotifications = async () => {
       const IsConfirm = confirm('Do you really want to clear all notification ... ?')
       if(IsConfirm){
-         const { data } = await axios.delete(`/api/clearAllNotifications/${userId}`)
+         const { data } = await axios.delete(`${BASEURL}/clearAllNotifications/${userId}`)
          
          if(data.Notifications){
             setNotificationList([])

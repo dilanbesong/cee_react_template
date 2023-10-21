@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios'
+import { BASEURL } from "../../../baseUrl";
 
 const CreateGroup = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const CreateGroup = () => {
   const [group, setGroup] = useState(defaultGroupInfo)
 
   async function getGroupInfo(){
-     const {  data } = await axios.get(`/api/getGroup/${state}`)
+     const {  data } = await axios.get(`${BASEURL}/getGroup/${state}`)
      setGroup(data)
   }
    
@@ -62,11 +63,11 @@ const CreateGroup = () => {
     e.preventDefault();
     if(isEdit){
        delete group._id
-       const { data } = await axios.put('/api/group/editGroup', group)
-       if(data.groupName) navigate(`/home/group/${data._id}`)
+       const { data } = await axios.put(`${BASEURL}/group/editGroup`, group)
+       if(data.groupName) navigate(`${BASEURL}/home/group/${data._id}`)
     }
-    const { data } = await axios.post('/api/createGroup', group)
-    if(data.groupName) navigate(`/home/group/${data._id}`)
+    const { data } = await axios.post(`${BASEURL}/createGroup`, group)
+    if(data.groupName) navigate(`${BASEURL}/home/group/${data._id}`)
     else alert(data.msg)
   };
   return (

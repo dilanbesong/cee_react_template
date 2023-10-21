@@ -8,7 +8,7 @@ import axios from "axios"
 import { useGlobalContext } from "../../../context"
 import maplibregl from 'maplibre-gl';
 import Map, {NavigationControl} from 'react-map-gl';
-
+import { BASEURL } from "../../../baseUrl"
 
 const Maps = ({ lat, lng, }) => {
     const locationCoord = useMemo( () => ({lat, lng}), [] )
@@ -51,7 +51,7 @@ const EsutLocation = () => {
 
    async function getCEEGallery(){
    
-    const { data } = await axios.get('/api/post/getAllpost')
+    const { data } = await axios.get(`${BASEURL}/post/getAllpost`)
   
     if(data.posts){
       let fileList = data.posts.map( post => {

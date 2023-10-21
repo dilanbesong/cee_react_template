@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Circles } from "react-loader-spinner";
 import { useNavigate } from 'react-router-dom'
+import { BASEURL } from "../../../baseUrl";
 
 const SearchPost = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -41,7 +42,7 @@ const SearchPost = () => {
       </>
   }
   async function getResults(){
-     const { data } = await axios.get(`/api/post/searchGroupsAndFriends/${searchInput}`)
+     const { data } = await axios.get(`${BASEURL}/post/searchGroupsAndFriends/${searchInput}`)
      setIsSearchLoading(true)
      if(data[0]){
        setIsSearchLoading(false)

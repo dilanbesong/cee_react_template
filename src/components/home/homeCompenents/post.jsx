@@ -8,6 +8,7 @@ import { ThreeDots,  InfinitySpin } from "react-loader-spinner";
 import { usePoster } from "../usePoster";
 import { formateText } from '../textFormate'
 import { mutualArray } from "./mutalAray";
+import { BASEURL } from "../../../baseUrl";
 const Post = ({
   _id,
   body,
@@ -45,7 +46,7 @@ const Post = ({
   }
 
   async function getFriendSuggestion() {
-    const { data } = await axios.get("/api/post/friendSuggestions");
+    const { data } = await axios.get(`${BASEURL}/post/friendSuggestions`);
     if (data.FriendSuggestions) {
       setIsLoadSuggestion(false);
       setSuggestionList(data.FriendSuggestions);
@@ -54,7 +55,7 @@ const Post = ({
   }
 
   async function getGroupSuggestion() {
-    const { data } = await axios.get("/api/post/groupSuggestions");
+    const { data } = await axios.get(`${BASEURL}/post/groupSuggestions`);
 
     if (data.GroupSuggestions.length) {
       setSuggestionList((suggestionList) => {

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { ThreeCircles } from "react-loader-spinner";
 import { mutualArray } from "./mutalAray";
+import { BASEURL } from "../../../baseUrl";
 const FriendRequest = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -10,7 +11,7 @@ const FriendRequest = () => {
   const user = JSON.parse(sessionStorage.getItem('user')).user
   async function getFriendRequest() {
   
-    const { data } = await axios.get(`/api/myFriendRequest/${user._id}`);
+    const { data } = await axios.get(`${BASEURL}/myFriendRequest/${user._id}`);
       console.log(data);
     if (data.friendRequest) {
       setFriendRequestList(data.friendRequest);
@@ -23,7 +24,7 @@ const FriendRequest = () => {
 
   const acceptFriendRequest = async (friendId) => {
     
-     const { data } = await axios.put('/api/acceptOneFriendRequest', { friendId, myId: user._id })
+     const { data } = await axios.put(`${BASEURL}/acceptOneFriendRequest`, { friendId, myId: user._id })
      if(data.friendId){
         alert('You are now friends...')
          setFriendRequestList(friendRequestList => {
@@ -35,7 +36,7 @@ const FriendRequest = () => {
   }
 
   const rejectFriendRequest = async (friendId) => {
-     const { data } = await axios.put('/api/rejectOneFriendRequest', { friendId, myId:user._id })
+     const { data } = await axios.put(`${BASEURL}/rejectOneFriendRequest`, { friendId, myId:user._id })
      console.log(data);
      if(data.friendId){
       const IsConfirm = confirm('Do you want to cancel this friend request ?')

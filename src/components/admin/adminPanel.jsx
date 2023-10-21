@@ -6,6 +6,7 @@ import axios from "axios";
 import { BarChart, BoysVsGirlsGraph, OnlineGraph } from "./chart";
 import { ThreeDots } from "react-loader-spinner";
 import io from "socket.io-client";
+import { BASEURL } from "../../baseUrl";
  const socket = io.connect("https://cee-info.onrender.com");
 
 const Levels = ["100", "200", "300", "400", "500"];
@@ -32,7 +33,7 @@ const AdminPanel = () => {
 
 
   async function getYears() {
-    const { data } = await axios.get("/api/adminPanel/getYearOptions");
+    const { data } = await axios.get(`${BASEURL}/adminPanel/getYearOptions`);
     if (data.YearOfEntry) {
       setShowYear(true);
       setYearList(data.YearOfEntry);
@@ -41,7 +42,7 @@ const AdminPanel = () => {
 
   async function getStudents(selectedYear) {
     const { data } = await axios.get(
-      `/api/adminPanel/getStudents/${selectedYear}`
+      `${BASEURL}/adminPanel/getStudents/${selectedYear}`
     );
     if (data.users) {
       setStudentData(data);
@@ -51,7 +52,7 @@ const AdminPanel = () => {
   }
   async function searchPayment(refNumber){ 
 
-    const { data } = await axios.get(`/api/payment/searchPayments/${refNumber}`)
+    const { data } = await axios.get(`${BASEURL}/payment/searchPayments/${refNumber}`)
     if(data.length){
       setIsLoadPayment(false)
       setPaymentList(data)
@@ -73,7 +74,7 @@ const AdminPanel = () => {
      if(isBlocked == false){
        const isConfirm = confirm('Are you sure you want to block this user ?')
        if(isConfirm){
-         const { data } = await axios.put('/api/adminPanel/blockAccount', { userId })
+         const { data } = await axios.put(`${BASEURL}/adminPanel/blockAccount`, { userId })
            if(data.msg){
               alert(data.msg)
               e.target.textContent = 'unblock'
@@ -85,7 +86,7 @@ const AdminPanel = () => {
      }
      const isConfirm = confirm('You are about to release this account click ok to release ?')
      if(isConfirm){ 
-         const { data } = await axios.put('/api/adminPanel/blockAccount', { userId })
+         const { data } = await axios.put(`${BASEURL}/adminPanel/blockAccount`, { userId })
          if(data.msg){
            alert(data.msg)
            this.isBlocked = false
