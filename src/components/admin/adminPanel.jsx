@@ -7,7 +7,7 @@ import { BarChart, BoysVsGirlsGraph, OnlineGraph } from "./chart";
 import { ThreeDots } from "react-loader-spinner";
 import io from "socket.io-client";
 import { BASEURL } from "../../baseUrl";
- const socket = io.connect("https://cee-info.onrender.com");
+ const socket = io.connect(BASEURL);
 
 const Levels = ["100", "200", "300", "400", "500"];
 

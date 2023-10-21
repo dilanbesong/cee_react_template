@@ -1,1 +1,1 @@
-export const BASEURL = "https://cee-info.onrender.com";
+export const BASEURL = "https://cee-departmental-app-backend.onrender.com";

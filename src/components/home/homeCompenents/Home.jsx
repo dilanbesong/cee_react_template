@@ -8,7 +8,7 @@ import { Circles, ThreeCircles, ThreeDots } from "react-loader-spinner";
 import { BASEURL } from "../../../baseUrl";
 // "https://cee-info.onrender.com"
 //http://localhost:3000
-const socket = io.connect("https://cee-info.onrender.com");
+const socket = io.connect(BASEURL);
 
 const Home = () => {
   const navigate = useNavigate();
