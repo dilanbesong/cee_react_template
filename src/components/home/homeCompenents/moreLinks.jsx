@@ -1,7 +1,4 @@
 import {useNavigate} from 'react-router-dom'
-import { useGlobalContext } from '../../../context'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
 
 const MoreLinks = () => {
    const user = JSON.parse(sessionStorage.getItem('user')).user
