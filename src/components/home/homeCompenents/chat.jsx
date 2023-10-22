@@ -9,8 +9,7 @@ import {  VoiceNote } from "./filegrid";
 import { timeAgo, convertTime } from "./createPost";
 import socket from "socket.io-client";
 import { BASEURL } from "../../../baseUrl";
-//"https://cee-info.onrender.com"
-//http://localhost:5000
+
 const io = socket.connect(BASEURL);
 
 

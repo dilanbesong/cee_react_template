@@ -70,6 +70,7 @@ const CreatePost = () => {
     fileList: [],
     createdAt: new Date(),
     updatedAt: new Date(),
+    userId:_id,
     Likes:[],
     Comments:[],
     views:0
