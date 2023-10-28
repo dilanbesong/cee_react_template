@@ -15,6 +15,7 @@ const Login = ({ authSlideContainer }) => {
    const [login, setLogin ] = useState({ email:'', password:''})
    const [isSubmit, setIsSubmit ] = useState(false)
    const [isLogin, setIsLogin ] = useState(false)
+   const [togglePassword, setTogglePassword ] = useState(false)
    const { setState } = useGlobalContext()
   
 
@@ -71,7 +72,8 @@ const Login = ({ authSlideContainer }) => {
             <div>
               <p>Password</p>
               <i className="fa fa-unlock-alt" aria-hidden="true"></i>
-              <input type="password" value={login.password} name="password" onChange={handleLoginInput} placeholder="enter password..." required />
+              <input type={ togglePassword ? 'password' : 'text'} value={login.password} name="password" onChange={handleLoginInput} placeholder="enter password..." required />
+              <i onClick={() => setTogglePassword(!togglePassword)} style={{fontSize:'1rem', color:'#000'}}  className={`fa  ${ togglePassword ? 'fa-eye' : 'fa-eye-slash' }`} aria-hidden></i>
             </div>
   
             </section>
