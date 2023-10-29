@@ -15,7 +15,7 @@ const Login = ({ authSlideContainer }) => {
    const [login, setLogin ] = useState({ email:'', password:''})
    const [isSubmit, setIsSubmit ] = useState(false)
    const [isLogin, setIsLogin ] = useState(false)
-   const [togglePassword, setTogglePassword ] = useState(false)
+   const [togglePassword, setTogglePassword ] = useState(true)
    const { setState } = useGlobalContext()
   
 

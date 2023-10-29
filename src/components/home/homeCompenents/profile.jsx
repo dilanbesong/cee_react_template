@@ -69,7 +69,7 @@ const Profile = () => {
   async function getDepartmentalReciept() {
     const {
       data: { DepartmentalFees },
-    } = await axios.get(`${BASEURL}/payment/getReciepts`);
+    } = await axios.get(`${BASEURL}/payment/getReciepts/${state}`);
     if(DepartmentalFees){
        setReciept(DepartmentalFees);
        return

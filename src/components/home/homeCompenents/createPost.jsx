@@ -66,7 +66,7 @@ const CreatePost = () => {
   } = student;
   const [post, setPost] = useState({
     body: "",
-    poster:'CEE',
+    poster:'user',
     fileList: [],
     createdAt: new Date(),
     updatedAt: new Date(),
@@ -171,7 +171,7 @@ const CreatePost = () => {
       }
 
       const { data } = await axios.post(`${BASEURL}/post/createPost`, post); // data is pointing to the post
-      // await axios.post('/api/createNotification', { notificatorId:data.poster, postId:data._id } )
+       await axios.post(`${BASEURL}/createNotification`, { notificatorId:data.poster, postId:data._id } )
         // createNotification.isNotify
         console.log(data);
       if (data) {
@@ -242,7 +242,7 @@ const CreatePost = () => {
             <img src={profileImage} alt="user_profile" />
             <div>
               <span>{username}</span>
-              <select name="poster" onChange={handlePost}>
+              <select name="poster" value={post.poster} onChange={handlePost}>
                 {isAdmin && <option value="CEE">CEE</option>}
                 {isAdmin && <option value="user">user</option>}
               </select>

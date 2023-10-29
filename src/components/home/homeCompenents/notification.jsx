@@ -19,10 +19,10 @@ const Notifications = () => {
    
    async function getNotifications(){
      const { data } = await axios.get(`${BASEURL}/getNotification/${userId}`)
-     console.log(data);
+
      if(data.NotificationList){
       setLoading(false)
-      setNotificationList(data.NotificationList)
+      setNotificationList(data.NotificationList.reverse())
       return
      }
       return

@@ -57,7 +57,7 @@ const Post = ({
   async function getGroupSuggestion() {
     const { data } = await axios.get(`${BASEURL}/post/groupSuggestions`);
 
-    if (data.GroupSuggestions.length) {
+    if (data.GroupSuggestions) {
       setSuggestionList((suggestionList) => {
         return [...suggestionList, data.GroupSuggestions];
       });
