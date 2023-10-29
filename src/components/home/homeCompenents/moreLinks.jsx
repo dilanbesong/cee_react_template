@@ -1,13 +1,12 @@
 import {useNavigate} from 'react-router-dom'
 
 const MoreLinks = () => {
-   const user = JSON.parse(sessionStorage.getItem('user')).user
    const navigation = useNavigate()
-   
-   
+   const user = JSON.parse(sessionStorage.getItem('user')).user
+  
     return <>
          <div className="moreLinks">
-                  <article className="linkCard" onClick={ () => navigation('/home/friendrequest',{ id:user._id})}>
+                  <article className="linkCard"  onClick={() => navigation('/home/friendrequest') } >
                      <div> <i className="fa fa-user-circle" aria-hidden="true"></i> <span>friend request</span></div>
                   </article>
                   <article className="linkCard" onClick={ () => navigation('/home/sentfriendrequest')}>
