@@ -44,9 +44,10 @@ const SearchPost = () => {
   async function getResults(){
      const { data } = await axios.get(`${BASEURL}/post/searchGroupsAndFriends/${searchInput}`)
      setIsSearchLoading(true)
-     if(data[0]){
+     if(data.suggestions){
        setIsSearchLoading(false)
-       setSearchResults(data)
+       setSearchResults(data.suggestions)
+       return
      }
   }
   useEffect(() => {
