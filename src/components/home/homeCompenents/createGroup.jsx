@@ -64,11 +64,19 @@ const CreateGroup = () => {
     if(isEdit){
        delete group._id
        const { data } = await axios.put(`${BASEURL}/group/editGroup`, group)
-       if(data.groupName) navigate(`${BASEURL}/home/group/${data._id}`)
+       if(data.groupName){
+        alert("Group succesfully edited...")
+        return
+        // navigate(`${BASEURL}/home/group/${data._id}`)
+       }
     }
     const { data } = await axios.post(`${BASEURL}/createGroup`, group)
-    if(data.groupName) navigate(`${BASEURL}/home/group/${data._id}`)
-    else alert(data.msg)
+    if(data.groupName){
+       alert("Group succesfully created...")
+      //navigate(`${BASEURL}/home/group/${data._id}`)
+      return
+    }
+    else alert(data.err)
   };
   return (
     <>

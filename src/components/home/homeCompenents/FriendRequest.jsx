@@ -12,7 +12,7 @@ const FriendRequest = () => {
   async function getFriendRequest() {
   
     const { data } = await axios.get(`${BASEURL}/myFriendRequest/${user._id}`);
-      console.log(data);
+      
     if (data.friendRequest) {
       setFriendRequestList(data.friendRequest);
       setLoading(false);
@@ -37,7 +37,7 @@ const FriendRequest = () => {
 
   const rejectFriendRequest = async (friendId) => {
      const { data } = await axios.put(`${BASEURL}/rejectOneFriendRequest`, { friendId, myId:user._id })
-     console.log(data);
+     
      if(data.friendId){
       const IsConfirm = confirm('Do you want to cancel this friend request ?')
       if(IsConfirm){

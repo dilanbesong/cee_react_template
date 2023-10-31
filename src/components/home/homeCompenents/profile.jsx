@@ -89,6 +89,7 @@ const Profile = () => {
   const sendFriendRequest = async () => {
     const { data } = await axios.put(`${BASEURL}/sendFriendOneRequest`, {
       friendId: student._id,
+      myId:user._id
     });
     if (data.msg) {
       alert(data.msg);

@@ -16,7 +16,7 @@ const GroupMembers = () => {
   const [loading, setLoading] = useState(true);
   async function getGroupMembers() {
     
-    const { data } = await axios.get(`/api/group/getALLGroupMembers/${state}`);
+    const { data } = await axios.get(`${BASEURL}/group/getALLGroupMembers/${state}`);
   
     if (data.groupMembers) {
       setGroupMembers(data.groupMembers)

@@ -49,6 +49,7 @@ const GroupPage = () => {
     const { data } = await axios.get(`${BASEURL}/getGroup/${id}`);
     setIsLoadingGroup(false);
     setGroup(data)
+    {timeAgo(new Date(data.createdAt))}
   }
   async function getGroupPost() {
     const { data } = await axios.get(`${BASEURL}/getGroupPost/${id}`);
@@ -75,14 +76,20 @@ const GroupPage = () => {
   }, []);
 
   const joinOrLeaveGroup = async (groupId) => {
-     const { data } = await axios.put(`${BASEURL}/joinGroup`, { groupId })
-     setGroup(data)
+     try{
+       const { data } = await axios.put(`${BASEURL}/joinGroup`, { groupId, myId:user._id })
+       setGroup(data)
      if(memberState == 'join'){
         setMemberState('You are a member')
         return
      }else{
         setMemberState('join')
      }
+
+     }catch(err){
+      alert(err.message)
+     }
+    
      
   }
 
